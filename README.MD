@@ -29,6 +29,7 @@ DATABASES = {
 ```
 
 **Comment CODE di bawah ini jika ingin integrasi django dengan postgres local**
+```
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -39,6 +40,7 @@ DATABASES = {
         'PORT' : '5432',
     }
 }
+```
 
 Finish your work based on apps that had already shuffled !
 
