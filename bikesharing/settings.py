@@ -74,6 +74,21 @@ WSGI_APPLICATION = 'bikesharing.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# Hilangkan comment CODE di bawah ini jika ingin integrasi django dengan postgres local
+######################################################################################
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'bikesharing',                                # NAME itu nama database local
+#         'USER' : 'postgres',                                  # USER itu nama user local
+#         'PASSWORD' : 'superuser',                             # PASSWORD itu password user local
+#         'HOST' : 'localhost',
+#         'PORT' : '5433',                                      # PORT yang ada di local saat install postgres pertama kali
+#     }
+# }
+
+# Comment CODE di bawah ini jika ingin integrasi django dengan postgres local
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -84,6 +99,7 @@ DATABASES = {
         'PORT' : '5432',
     }
 }
+######################################################################################
 
 import dj_database_url
 

@@ -6,10 +6,39 @@ Bike Sharing is an application to manage your bike station. This app is built in
 
 ## INSTALLATION
 Setting up the project to your local machine:
-1. git init
-2. git remote add origin https://gitlab.com/c6-basdat/bikesharing.git
-3. git pull origin master
-4. pip install -r requirements.txt
+```
+git init
+git remote add origin https://gitlab.com/c6-basdat/bikesharing.git
+git pull origin master
+pip install -r requirements.txt
+```
+
+**Hilangkan comment CODE di bawah ini jika ingin integrasi django dengan postgres local**
+
+```
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+         'NAME': 'bikesharing',                                # NAME itu nama database local
+         'USER' : 'postgres',                                  # USER itu nama user local
+         'PASSWORD' : 'superuser',                             # PASSWORD itu password user local
+         'HOST' : 'localhost',
+         'PORT' : '5433',                                      # PORT yang ada di local saat install postgres pertama kali
+     }
+}
+```
+
+**Comment CODE di bawah ini jika ingin integrasi django dengan postgres local**
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd1ejmv9dvb87c7',
+        'USER' : 'ioerjbwnqvxdby',
+        'PASSWORD' : 'fe09a0a3f8604581154d440db57c479d5fd858be1af21d2a299930ca1e51a744',
+        'HOST' : 'ec2-23-23-228-132.compute-1.amazonaws.com',
+        'PORT' : '5432',
+    }
+}
 
 Finish your work based on apps that had already shuffled !
 
