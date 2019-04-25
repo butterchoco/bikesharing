@@ -77,14 +77,18 @@ WSGI_APPLICATION = 'bikesharing.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bikesharing',
-        'USER' : 'postgres',
-        'PASSWORD' : 'superuser',
-        'HOST' : 'localhost',
+        'NAME': 'd1ejmv9dvb87c7',
+        'USER' : 'ioerjbwnqvxdby',
+        'PASSWORD' : 'fe09a0a3f8604581154d440db57c479d5fd858be1af21d2a299930ca1e51a744',
+        'HOST' : 'ec2-23-23-228-132.compute-1.amazonaws.com',
         'PORT' : '5433',
     }
 }
 
+import dj_database_url
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
