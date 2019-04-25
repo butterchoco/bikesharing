@@ -11,7 +11,8 @@ Setting up the project to your local machine:
 3. git pull origin master
 4. pip install -r requirements.txt
 
-Next step :: Finish your work based on apps that had already shuffled.
+Finish your work based on apps that had already shuffled !
+
 **Note** : Don't forget to do "python manage.py startapp [NEW_APP]" to make a new app.
 
 ## CONTRIBUTE
