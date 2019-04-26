@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -98,17 +99,18 @@ DATABASES = {
         'HOST' : 'ec2-23-23-228-132.compute-1.amazonaws.com',
         'PORT' : '5432',
     },
-    'TEST': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
 }
 ######################################################################################
 
-import dj_database_url
-
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
+
+TEST_DATABASES = {
+    'default': dj_database_url.config(env='TEST_DATABASE_URL')
+}
+
+# replace path below to point to HerokuTestSuiteRunner class
+TEST_RUNNER = 'bikesharing.test_suite_runner.HerokuTestSuiteRunner'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
