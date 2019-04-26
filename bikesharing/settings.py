@@ -57,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'bikesharing.urls'
@@ -83,21 +84,6 @@ WSGI_APPLICATION = 'bikesharing.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-# Hilangkan comment CODE di bawah ini jika ingin integrasi django dengan postgres local
-######################################################################################
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'bikesharing',                                # NAME itu nama database local
-#         'USER' : 'postgres',                                  # USER itu nama user local
-#         'PASSWORD' : 'superuser',                             # PASSWORD itu password user local
-#         'HOST' : 'localhost',
-#         'PORT' : '5433',                                      # PORT yang ada di local saat install postgres pertama kali
-#     }
-# }
-
-# Comment CODE di bawah ini jika ingin integrasi django dengan postgres local
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -106,12 +92,28 @@ DATABASES = {
         'PASSWORD' : 'fe09a0a3f8604581154d440db57c479d5fd858be1af21d2a299930ca1e51a744',
         'HOST' : 'ec2-23-23-228-132.compute-1.amazonaws.com',
         'PORT' : '5432',
+        'CONN_MAX_AGE': 600,
+        'OPTIONS' : {
+            'sslmode' : 'require'
+        },
     },
 }
-######################################################################################
+TEST_DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd83klm7i8d7qpr',
+        'USER' : 'ezzkgkbtrxnlyt',
+        'PASSWORD' : 'e73c5cb8abd0ef9ead273c78c42f3918cc96c794db68be993b2a0056cebd1287',
+        'HOST' : 'ec2-54-235-208-103.compute-1.amazonaws.com',
+        'PORT' : '5432',
+        'CONN_MAX_AGE': 600,
+        'OPTIONS' : {
+            'sslmode' : 'require'
+        },
+    },
+}
 
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+TEST_RUNNER = 'bikesharing.test_suite_runner.HerokuTestSuiteRunner'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -148,6 +150,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
+
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
