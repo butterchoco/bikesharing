@@ -16,7 +16,7 @@ UnitTest:
     # - apt-get install -y xvfb
     # - wget https://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip
     # - unzip chromedriver_linux64.zip
-    - python manage.py --no-input
+    - python manage.py collectstatic --no-input
   when: on_success
   script:
     - coverage run --source=home manage.py test
