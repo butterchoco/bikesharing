@@ -2,6 +2,7 @@
 
 # BikeSharing 
 [![pipeline status](https://gitlab.com/c6-basdat/bikesharing/badges/master/pipeline.svg)](https://gitlab.com/c6-basdat/bikesharing/commits/master)
+[Bikesharing HerokuApp](http://c6-basdat-bikesharing.herokuapp.com/home/)
 
 ## GETTING STARTED
 Bike Sharing is an application to manage your bike station. This app is built in order to increase the usage of bike in largest city of Indonesia. Bike sharing is developed underpressure. Its idea is come from an assignment from contributor's university in Computer Science Faculty.

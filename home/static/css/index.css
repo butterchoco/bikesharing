@@ -45,3 +45,11 @@
                 -webkit-clip-path: circle(38% at 50% 50%);
                 clip-path: circle(38% at 50% 50%);
             }
+
+            white-bg {
+                background-color: black;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                z-index: -1000;
+            }
