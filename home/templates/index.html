@@ -21,75 +21,25 @@
                     <div class="col-md">
                         <img id="logo" class="img-fluid clip" alt="Bootstrap Image Preview" src="{% static 'img/bike_animation.gif' %}" />
                     </div>
-                    <div id="description" class="col-md">
-                        <h3>
-                            ShareBike
-                        </h3>
-                        <p>
-                            ShareBike is an application to store everything you need about bike.<strong>You can manage your bike, station, transaction history, bike events, and so on.</strong> ShareBike allows you to lend a bike from many cities. There are some vouchers which you can get if you are lucky enough !. 
-                        </p>
-                        <button type="button" id="signup-home" class="btn btn-white-glow">
-                            <a role="button" class="btn">Sign up !</a>
-                        </button>
+                    <div class="col-md">
+                        <div id="signup-form" class="opacity-animate-on">
+                        </div>
+                        <div id="description">
+                            <h3>
+                                ShareBike
+                            </h3>
+                            <p>
+                                ShareBike is an application to store everything you need about bike.<strong>You can manage your bike, station, transaction history, bike events, and so on.</strong> ShareBike allows you to lend a bike from many cities. There are some vouchers which you can get if you are lucky enough !. 
+                            </p>
+                            <button type="button" id="signup-home" class="btn btn-white-glow">
+                                <a role="button" class="btn">Sign up !</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="signup-form">
-            <form role="form">
-                <div class="form-group">
-                    <label for="exampleInputNoKTP1">
-                        No KTP
-                    </label>
-                    <input type="text" class="form-control" id="exampleInputNoKTP1" />
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputname1">
-                        Nama Lengkap
-                    </label>
-                    <input type="name" class="form-control" id="exampleInputname1" />
-                    
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">
-                        Email address
-                    </label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" />
-                    
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputTanggalLahir1">
-                        Tanggal Lahir address
-                    </label>
-                    <input type="date" class="form-control" id="exampleInputTanggalLahir1" />
-                    
-                            </div>
-
-                            <div class="form-group">
-                                <label for="exampleInputNoTlp1">
-                                    No. Telepon
-                                </label>
-                                <input type="text" class="form-control" id="exampleInputNoTlp1" />
-                                
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputAlamat1">
-                                            Alamat
-                                        </label>
-                                        <input type="text" class="form-control" id="exampleInputAlamat1" />
-                                        
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" /> Setuju dengan ketentuan dan peraturan yang berlaku.
-                                        </label>
-                                    </div> 
-                                    <button type="submit" class="btn btn-green m-3">
-                                        Sign up
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                        <script src="{% static 'js/index.js' %}"></script>
-                    </body>
-                    </html>
+    </div>
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
