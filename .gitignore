@@ -131,6 +131,6 @@ target/
 # celery beat schedule file
 celerybeat-schedule
 
-\.vscode
-\env
+.vscode
+bikesharing/__pycache__
 requirement.txt
