@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import dj_database_url
+from .decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(!jv-%k&agkhym2av(*pkhtt90^v)=(vdu8n(x&c1bqd&$yuf='
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'rest_framework',
     'home',
+    'registrasi',
 ]
 
 REST_FRAMEWORK = {
@@ -89,8 +91,16 @@ WSGI_APPLICATION = 'bikesharing.wsgi.application'
 
 DATABASES = {}
 TEST_DATABASES = {}
-DATABASES['default'] = dj_database_url.config(env='DATABASE', conn_max_age=600)
-TEST_DATABASES['default'] = dj_database_url.config(env='TEST_DATABASE_URL')
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
+TEST_DATABASES = {
+    'default': dj_database_url.config(
+        default=config('TEST_DATABASE_URL')
+    )
+}
 
 TEST_RUNNER = 'bikesharing.test_suite_runner.HerokuTestSuiteRunner'
 
