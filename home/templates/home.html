@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="static/css/home.css">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 
 <body>
@@ -18,7 +20,7 @@
                 <h1 id="signup-title" hidden>Sign up Now !</h1>
                 <h1 id="signin-title" hidden>Sign in There !</h1>
                 <img id="logo" class="img-fluid clip" alt="Bootstrap Image Preview"
-                    src="static/img/bike_animation.gif" />
+                src="{% static 'img/bike_animation.gif' %}" />
             </div>
             <div class="col grid-3">
                 <div id="description" class="m-1">
@@ -63,7 +65,7 @@
             <div class="col grid-4"></div>
         </div>
     </section>
-    <script src="static/js/home.js"></script>
+    <script src="{% static 'js/home.js' %}"></script>
 </body>
 
 </html>

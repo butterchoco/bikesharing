@@ -8,7 +8,12 @@ const signinTitle = document.getElementById('signin-title');
 const signupTrans = document.getElementById('signup-trans');
 const description = document.getElementById('description');
 const signupGroup = document.getElementById('signup-group');
+const page1 = document.getElementById('page1')
 signupTrans.addEventListener('click', function() {
+    if(window.innerWidth < 800) {
+        page1.style.height = '150vh';
+        page1.style.overflow = 'scroll';
+    }
     signupGroup.classList.add('slide-up');
     description.classList.add('fade-out');
     signupTitle.hidden = false;
