@@ -19,11 +19,6 @@ section {
     z-index: 0;
 }
 
-section#page1 {
-    background-color: rgb(255, 255, 255);
-    overflow: hidden;
-}
-
 img {
     max-width: 100%;
     height: auto;
@@ -308,12 +303,19 @@ label, input {
     color: white;
     font-weight: bolder;
     text-transform: uppercase;
+    transition: all 1s;
 }
 
 #signin-title {
     color: white;
     font-weight: bolder;
     text-transform: uppercase;
+    transition: all 1s;
+}
+
+section#page1 {
+    background-color: rgb(255, 255, 255);
+    overflow: hidden;
 }
 
 /*----------- Animation ----------*/
