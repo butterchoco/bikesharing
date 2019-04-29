@@ -17,6 +17,7 @@ from django.urls import path, include
 from django.views.generic.base import RedirectView
 from django.contrib.auth.models import User
 from rest_framework import serializers, viewsets, routers
+from . import settings
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -44,3 +45,13 @@ urlpatterns = [
     path('router/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+
+        # For django versions before 2.0:
+        # url(r'^__debug__/', include(debug_toolbar.urls)),
+
+    ] + urlpatterns
