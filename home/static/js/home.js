@@ -11,8 +11,8 @@ const signupGroup = document.getElementById('signup-group');
 const page1 = document.getElementById('page1')
 signupTrans.addEventListener('click', function() {
     if(window.innerWidth < 800) {
-        page1.style.height = '150vh';
-        page1.style.overflow = 'scroll';
+        page1.style.height = '135vh';
+        page1.style.overflowY = 'scroll';
     }
     signupGroup.classList.add('slide-up');
     description.classList.add('fade-out');
