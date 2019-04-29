@@ -133,5 +133,4 @@ celerybeat-schedule
 
 .vscode
 bikesharing/__pycache__
-bikesharing/settings.ini
 requirement.txt
