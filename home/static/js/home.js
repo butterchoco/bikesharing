@@ -53,7 +53,7 @@ function ripple(e) {
     ripplePlaceholder.appendChild(transitionEffect);
 
     var d = Math.max(document.body.clientWidth*3);
-    if (window.innerWidth < 400) d = Math.max(document.body.clientWidth*5);
+    if (window.innerWidth < 800) d = Math.max(document.body.clientWidth*5);
     transitionEffect.style.width = transitionEffect.style.height = d + 'px';
     transitionEffect.style.left = e.clientX - d/2 + 'px';
     transitionEffect.style.top = e.clientY - d/2 + 'px';
