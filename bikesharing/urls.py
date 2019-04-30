@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import RedirectView
 from . import settings
-from .routers import router
+from .utils.routers import router
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
