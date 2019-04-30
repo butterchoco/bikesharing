@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import dj_database_url
+from .utils.decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(!jv-%k&agkhym2av(*pkhtt90^v)=(vdu8n(x&c1bqd&$yuf='
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'rest_framework',
     'home',
+    'registrasi',
 ]
 
 REST_FRAMEWORK = {
@@ -58,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'bikesharing.urls'
@@ -84,36 +89,20 @@ WSGI_APPLICATION = 'bikesharing.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+DATABASES = {}
+TEST_DATABASES = {}
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1ejmv9dvb87c7',
-        'USER' : 'ioerjbwnqvxdby',
-        'PASSWORD' : 'fe09a0a3f8604581154d440db57c479d5fd858be1af21d2a299930ca1e51a744',
-        'HOST' : 'ec2-23-23-228-132.compute-1.amazonaws.com',
-        'PORT' : '5432',
-        'CONN_MAX_AGE': 600,
-        'OPTIONS' : {
-            'sslmode' : 'require'
-        },
-    },
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
 TEST_DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd83klm7i8d7qpr',
-        'USER' : 'ezzkgkbtrxnlyt',
-        'PASSWORD' : 'e73c5cb8abd0ef9ead273c78c42f3918cc96c794db68be993b2a0056cebd1287',
-        'HOST' : 'ec2-54-235-208-103.compute-1.amazonaws.com',
-        'PORT' : '5432',
-        'CONN_MAX_AGE': 600,
-        'OPTIONS' : {
-            'sslmode' : 'require'
-        },
-    },
+    'default': dj_database_url.config(
+        default=config('TEST_DATABASE_URL')
+    )
 }
 
-TEST_RUNNER = 'bikesharing.test_suite_runner.HerokuTestSuiteRunner'
+TEST_RUNNER = 'bikesharing.utils.test_suite_runner.HerokuTestSuiteRunner'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -156,3 +145,5 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+INTERNAL_IPS = ('127.0.0.1',)
