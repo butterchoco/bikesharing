@@ -24,9 +24,10 @@ from .utils.routers import router
 urlpatterns = [
     path('', RedirectView.as_view(url='home/')),
     path('admin/', admin.site.urls),
-    path('home/', include('home.urls', namespace='home')),
     path('router/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('home/', include('home.urls', namespace='home')),
+    path('registrasi/', include('registrasi.urls', namespace='registrasi'))
 ]
 
 if settings.DEBUG:

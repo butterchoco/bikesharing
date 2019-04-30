@@ -9,6 +9,7 @@ const signupTrans = document.getElementById('signup-trans');
 const description = document.getElementById('description');
 const signupGroup = document.getElementById('signup-group');
 const page1 = document.getElementById('page1')
+
 signupTrans.addEventListener('click', function() {
     if(window.innerWidth < 800) {
         page1.style.height = '135vh';
@@ -57,5 +58,4 @@ function ripple(e) {
     transitionEffect.style.width = transitionEffect.style.height = d + 'px';
     transitionEffect.style.left = e.clientX - d/2 + 'px';
     transitionEffect.style.top = e.clientY - d/2 + 'px';
-
 }
