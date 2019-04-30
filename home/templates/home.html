@@ -34,22 +34,10 @@
                     <button id="signup-trans" data-color="green" class="btn white out-green transition">Sign up</button>
                 </div>
                 <div id="signup-group" class="card" hidden>
-                    <form id="signup" role="form">
-                        <div class="form-group"><label for="exampleInputNoKTP1">No KTP</label><input type="text"
-                                class="form-control" id="exampleInputNoKTP1" placeholder="your id card..." /></div>
-                        <div class="form-group"><label for="exampleInputname1">Nama Lengkap</label><input type="name"
-                                class="form-control" id="exampleInputname1" placeholder="your name..."/></div>
-                        <div class="form-group"><label for="exampleInputEmail1">Email address</label><input type="email"
-                                class="form-control" id="exampleInputEmail1" placeholder="your email..."/></div>
-                        <div class="form-group"><label for="exampleInputTanggalLahir1">Tanggal Lahir address</label><input
-                                type="date" class="form-control" id="exampleInputTanggalLahir1" placeholder="your phone number" /></div>
-                        <div class="form-group"><label for="exampleInputNoTlp1">No. Telepon</label><input type="text"
-                                class="form-control" id="exampleInputNoTlp1" placeholder="your phone number"/></div>
-                        <div class="form-group"><label for="exampleInputAlamat1">Alamat</label><input type="text"
-                                class="form-control" id="exampleInputAlamat1" placeholder="your address..."/></div>
-                        <div class="checkbox"><label><input type="checkbox" /> Setuju dengan ketentuan dan peraturan yang
-                                berlaku.</label></div> 
-                        <button type="submit" class="btn green m-1">Sign up</button>
+                    <form id="signup" method="POST" role="form">
+                        {% csrf_token %}
+                        {{ form }}
+                        <button id="submit_form" type="submit" class="btn green m-1">Sign up</button>
                         <p>Already have account ? <a id="signin-trans">Sign in here.</a></p>
                     </form>
                     <form role="form" id="signin" hidden>
@@ -65,6 +53,8 @@
             <div class="col grid-4"></div>
         </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    <script src="{% static 'js/signup.js' %}"></script>
     <script src="{% static 'js/home.js' %}"></script>
 </body>
 
