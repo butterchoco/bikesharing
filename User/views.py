@@ -17,7 +17,9 @@ class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.raw(query)
     serializer_class = PersonSerializer
 
+
 # Create your views here.
+no_kartu = 1
 
 
 def signUp(request):
@@ -39,6 +41,16 @@ def signUp(request):
                 else:
                     cursor.execute("INSERT INTO public.\"PERSON\" VALUES(%s, %s, %s, %s, %s, %s)", [
                         ktp, email, nama, alamat, tgl_lahir, no_telp])
+                    if (role == "ADMIN"):
+                        cursor.execute(
+                            "INSERT INTO public.\"ADMIN\" VALUES(%s)", [ktp])
+                    elif (role == "ANGGOTA"):
+                        cursor.execute(
+                            "INSERT INTO public.\"ANGGOTA\" VALUES(%s, 0, 0, %s)", [no_kartu, ktp])
+                        no_kartu += 1
+                    else:
+                        cursor.execute(
+                            "INSERT INTO public.\"PETUGAS\" VALUES(%s, 0)", [ktp])
                     user = User.objects.create_user(ktp, email, 'admin123')
                     user.save()
             return HttpResponseRedirect('')
@@ -54,12 +66,18 @@ def login(request):
         if(form.is_valid()):
             ktp = request.POST.get('ktp', False)
             email = request.POST.get('email', False)
+            role = request.POST.get('role', False)
             with connection.cursor() as cursor:
-                cursor.execute("SELECT * FROM public.\"PERSON\"", )
+                if (role == "ADMIN"):
+                    cursor.execute("SELECT * FROM public.\"ADMIN\"", )
+                elif (role == "ANGGOTA"):
+                    cursor.execute("SELECT * FROM public.\"ANGGOTA\"", )
+                elif (role == "PETUGAS"):
+                    cursor.execute("SELECT * FROM public.\"PETUGAS\"", )
                 json = cursor.fetchall()
                 if (ktp in Response(json)):
                     user = authenticate(
-                        request, username=ktp, password='admin123')
+                        request, username=ktp, password='test123')
                     if (user is not None):
                         login(request, user)
                         return HttpResponseRedirect('')
