@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'rest_framework',
-    'home',
-    'registrasi',
+    'Home',
+    'User',
 ]
 
 REST_FRAMEWORK = {
