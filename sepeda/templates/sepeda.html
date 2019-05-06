@@ -1,0 +1,40 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/sepeda.css' %}">
+</head>
+
+<body>
+    <section id="page1">
+        <div id="ripplePlaceholder"></div>
+        <div class="row grid flex-center">
+            <div class="col grid-4"></div>
+            <div class="col grid-3 flex-center">
+                <img id="logo" class="img-fluid clip" alt="Bootstrap Image Preview"
+                src="{% static 'img/cyclist-dribbble_orig.gif' %}"/>
+            </div>
+            <div class="col grid-3">
+                <div id="signup-group" class="card">
+                    <form id="signup" method="POST" role="form">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button id="submit_form" type="submit" class="btn green m-1">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col grid-4"></div>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+    <script src="{% static 'js/signup.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+
+</html>

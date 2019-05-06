@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'home',
     'registrasi',
+    'sepeda',
+    'stasiun'
 ]
 
 REST_FRAMEWORK = {

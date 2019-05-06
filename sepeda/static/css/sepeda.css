@@ -35,7 +35,48 @@ a:hover {
 }
 
 
+
 /*------------- Component -------------*/
+#button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 3% 6%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10%;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+#sepeda_button {
+    width: 30%;
+    height: 25%;
+    border-radius: 5%;
+    background-color: white; 
+    color: black; 
+    border: 2px solid #00a8b5;
+}
+
+#sepeda_button_table {
+    width: 30%;
+    height: 25%;
+    border-radius: 5%;
+    background-color: #00a8b5; 
+    color: White; 
+    border: 2px solid #white;
+    margin-right: 10%;
+}
+
+#sepeda_button:hover {
+    border-radius: 5%;
+    background-color: #00a8b5;
+    color: white;
+}
+
 #ripplePlaceholder {
     position: absolute;
     z-index: -1;
@@ -236,7 +277,7 @@ label, input {
 
     .col-grid-4 {
         width: 100%;
-    }  
+    }
 }
 
 @media only screen and (max-width: 500px) {

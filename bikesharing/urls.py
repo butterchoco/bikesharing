@@ -27,7 +27,9 @@ urlpatterns = [
     path('router/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('home/', include('home.urls', namespace='home')),
-    path('registrasi/', include('registrasi.urls', namespace='registrasi'))
+    path('registrasi/', include('registrasi.urls', namespace='registrasi')),
+    path('sepeda/', include('sepeda.urls', namespace='sepeda')),
+    path('stasiun/', include('stasiun.urls', namespace='stasiun'))
 ]
 
 if settings.DEBUG:
