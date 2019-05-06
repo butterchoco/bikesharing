@@ -20,7 +20,7 @@
                 <h1 id="signup-title" hidden>Sign up Now !</h1>
                 <h1 id="signin-title" hidden>Sign in There !</h1>
                 <img id="logo" class="img-fluid clip" alt="Bootstrap Image Preview"
-                src="{% static 'img/bike_animation.gif' %}" />
+                    src="{% static 'img/bike_animation.gif' %}" />
             </div>
             <div class="col grid-3">
                 <div id="description" class="m-1">
@@ -36,18 +36,36 @@
                 <div id="signup-group" class="card" hidden>
                     <form id="signup" method="POST" role="form">
                         {% csrf_token %}
-                        {{ form }}
-                        <button id="submit_form" type="submit" class="btn green m-1">Sign up</button>
-                        <p>Already have account ? <a id="signin-trans">Sign in here.</a></p>
-                    </form>
-                    <form role="form" id="signin" hidden>
-                        <div class="form-group"><label for="exampleInputNoKTP1">No KTP</label><input type="text"
-                                class="form-control" id="exampleInputNoKTP1" placeholder="your id card..." /></div>
-                        <div class="form-group"><label for="exampleInputEmail1">Email address</label><input type="email"
-                                class="form-control" id="exampleInputEmail1" placeholder="your email..."/></div>
-                        <button type="submit" class="btn green m-1">Sign in</button>
-                        <p>Don't Have Account ? <a id="signup-in-trans">Sign up now.</a></p>
-                    </form>
+                        <form id="signup" role="form">
+                            <div class="form-group"><label for="id_ktp">No KTP</label><input type="text"
+                                    class="form-control" id="id_ktp" placeholder="your id card..." /></div>
+                            <div class="form-group"><label for="id_nama">Nama Lengkap</label><input type="name"
+                                    class="form-control" id="id_nama" placeholder="your name..." /></div>
+                            <div class="form-group"><label for="id_email">Email address</label><input type="email"
+                                    class="form-control" id="id_email" placeholder="your email..." /></div>
+                            <div class="form-group"><label for="id_tgl_lahir">Tanggal Lahir
+                                    address</label><input type="date" class="form-control" id="id_tgl_lahir"
+                                    placeholder="your phone number" /></div>
+                            <div class="form-group"><label for="id_no_telp">No. Telepon</label><input type="text"
+                                    class="form-control" id="id_no_telp" placeholder="your phone number" /></div>
+                            <div class="form-group"><label for="id_alamat">Alamat</label><input type="text"
+                                    class="form-control" id="id_alamat" placeholder="your address..." /></div>
+                            <select id='id_role'>
+                                <option value="ADMIN">ADMIN</option>
+                                <option value="ANGGOTA">ANGGOTA</option>
+                                <option value="PETUGAS">PETUGAS</option>
+                            </select>
+                            <button id="submit_form" type="submit" class="btn green m-1">Sign up</button>
+                            <p>Already have account ? <a id="signin-trans">Sign in here.</a></p>
+                        </form>
+                        <form role="form" id="signin" hidden>
+                            <div class="form-group"><label for="id_ktp">No KTP</label><input type="text"
+                                    class="form-control" id="exampleInputNoKTP1" placeholder="your id card..." /></div>
+                            <div class="form-group"><label for="id_email">Email address</label><input type="email"
+                                    class="form-control" id="exampleInputEmail1" placeholder="your email..." /></div>
+                            <button type="submit" class="btn green m-1">Sign in</button>
+                            <p>Don't Have Account ? <a id="signup-in-trans">Sign up now.</a></p>
+                        </form>
                 </div>
             </div>
             <div class="col grid-4"></div>

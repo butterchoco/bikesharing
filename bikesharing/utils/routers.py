@@ -1,6 +1,6 @@
 from rest_framework import routers
 from .views import UserViewSet
-from User.views import PersonViewSet
+from registrasi.views import PersonViewSet
 
 # Routers provide a way of automatically determining the URL conf.
 router = routers.DefaultRouter()

@@ -27,8 +27,14 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'c6-basdat-bikesharing.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
+                 'c6-basdat-bikesharing.herokuapp.com']
 
+CORS_ORIGIN_WHITELIST = (
+    'sharebike.netlify.com',
+    '127.0.0.1:4200',
+    'localhost:4200'
+)
 
 # Application definition
 
@@ -41,8 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'rest_framework',
+    'corsheaders',
     'Home',
-    'User',
+    'registrasi',
 ]
 
 REST_FRAMEWORK = {
@@ -63,6 +70,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'bikesharing.urls'
