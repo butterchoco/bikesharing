@@ -1,0 +1,34 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+
+<h1 style=" text-align: center;"> Pendaftaran Penugasan</h1>
+
+<section id="page1">
+    <div id="ripplePlaceholder"></div>
+    <div class="row grid flex-center">
+        <div class="col grid-4"></div>
+        <div class="col grid-3 flex-center">
+            <img id="logo" class="img-fluid" alt="Bootstrap Image Preview" src="{% static 'img/animated-book.gif' %}" />
+        </div>
+        <div class="col grid-3">
+            <div id="signup-group" class="card">
+                <form id="signup" method="POST" role="form">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button id="submit_form" type="submit" class="btn green m-1">Enroll</button>
+                </form>
+                <form role="form" id="signin" hidden>
+                    <button type="submit" class="btn green m-1">Enroll</button>
+                </form>
+
+            </div>
+        </div>
+        <button type="submit" class="block btn green m-1" style="border-radius: 70%">View Table</button>
+        <div class="col grid-4"></div>
+    </div>
+</section>
+
+{% endblock %}

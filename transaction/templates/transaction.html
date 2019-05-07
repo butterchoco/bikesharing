@@ -1,0 +1,36 @@
+{% extends 'sidebar.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col grid">
+    <div class="card">
+      <h1 id="title">Transaksi</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>No Kartu Anggota</th>
+            <th>Date time</th>
+            <th>Jenis</th>
+            <th>Nominal</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>1234567890</td>
+            <td>2019-04-03</td>
+            <td>Top Up</td>
+            <td>100000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class=" circle ripple" data-color="white" id="add-transaction">
+  <i id="add" class="material-icons md-light">add</i>
+</div>
+
+{% endblock %}

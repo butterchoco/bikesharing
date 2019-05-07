@@ -1,0 +1,35 @@
+{% extends 'sidebar.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col grid">
+    <div class="card">
+      <h1 id="title">Laporan</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Id Laporan</th>
+            <th>No Kartu Anggota</th>
+            <th>Date time pinjam</th>
+            <th>Nomor Sepeda</th>
+            <th>Id Stasiun</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>1234567890</td>
+            <td>2019-04-03</td>
+            <td>12</td>
+            <td>142</td>
+            <td>Rent</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
