@@ -51,6 +51,8 @@ a:hover {
 nav {
 	width: 100%;
 	height: 3em;
+	display: flex;
+	flex-direction: row;
 }
 
 /*------------- Component -------------*/
@@ -306,6 +308,11 @@ input {
 		overflow: scroll;
 	}
 
+	.row {
+		display: flex;
+		flex-direction: column;
+	}
+
 	.row-grid-2 {
 		max-height: 100%;
 	}
@@ -338,6 +345,11 @@ input {
 		position: relative;
 		z-index: 0;
 		overflow-y: scroll;
+	}
+
+	.row {
+		display: flex;
+		flex-direction: column;
 	}
 
 	.col-grid-2 {
