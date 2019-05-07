@@ -308,6 +308,11 @@ input {
 		overflow: scroll;
 	}
 
+	.row {
+		display: flex;
+		flex-direction: column;
+	}
+
 	.row-grid-2 {
 		max-height: 100%;
 	}
@@ -340,6 +345,11 @@ input {
 		position: relative;
 		z-index: 0;
 		overflow-y: scroll;
+	}
+
+	.row {
+		display: flex;
+		flex-direction: column;
 	}
 
 	.col-grid-2 {
