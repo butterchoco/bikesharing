@@ -1,0 +1,56 @@
+{% load static %}
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Bikesharing</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+  <section class="container">
+    {% if ktp %}
+    <div id="side">
+      <a href="/">
+        <div class="row flex-center"><i class="material-icons md-light">dashboard</i></div>
+      </a>
+      {% if role == "ANGGOTA" %}
+      <a href="/">
+        <div class="row flex-center"><i class="material-icons md-light">commute</i></div>
+      </a>
+      <a href="/">
+        <div class="row flex-center"><i class="material-icons md-light">motorcycle</i></div>
+      </a>
+      {% endif %}
+      <a href="/transaction">
+        <div class="row flex-center"><i class="material-icons md-light">compare_arrows</i></div>
+      </a>
+      <a href="/report">
+        <div class="row flex-center"><i class="material-icons md-light">assignment</i></div>
+      </a>
+      {% if role == "PETUGAS" %}
+      {% endif %}
+      <a href="/user/logout">
+        <div class="row flex-center"><i class="material-icons md-light">power_settings_new</i></div>
+      </a>
+    </div>
+
+    <div id="page-nav" class="grey">
+      {% include 'navbar.html' %}
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    {% endif %}
+  </section>
+
+  <script src="{% static 'js/page-nav.js' %}"></script>
+</body>
+
+</html>

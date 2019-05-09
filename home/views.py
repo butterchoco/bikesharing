@@ -1,9 +1,20 @@
 from django.shortcuts import render
-from registrasi.forms import signup_form
 
 # Create your views here.
+response = {}
 
 
 def index(request):
-    form = signup_form()
-    return render(request, 'home.html', {'form': form})
+    if ('ktp' in request.session.keys()):
+        response['ktp'] = request.session['ktp']
+        response['nama'] = request.session['nama']
+        response['role'] = request.session['role']
+        if (request.session['role'] == "ANGGOTA"):
+            response['no_kartu'] = request.session['no_kartu']
+            response['saldo'] = request.session['saldo']
+            response['poin'] = request.session['poin']
+        elif (request.session['role'] == "PETUGAS"):
+            response['gaji'] = request.session['gaji']
+        return render(request, 'dashboard.html', response)
+    else:
+        return render(request, 'home.html', response)

@@ -26,8 +26,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('router/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('home/', include('Home.urls', namespace='home')),
-    path('user/', include('registrasi.urls', namespace='user'))
+    path('home/', include('home.urls', namespace='home')),
+    path('user/', include('registrasi.urls', namespace='registrasi')),
+    path('transaction/', include('transaction.urls', namespace='transaction')),
+    path('report/', include('report.urls', namespace='report')),
+    path('acara/', include('acara.urls', namespace='acara')),
+    path('penugasan/', include('penugasan.urls', namespace='penugasan')),
 ]
 
 if settings.DEBUG:

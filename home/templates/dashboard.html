@@ -1,0 +1,58 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="row">
+  <div class="col grid flex-center">
+    <div class="card">
+      <div class="col grid">
+        <h1 id="title">Profile</h1>
+        <div class="row">
+          <div class="col grid">
+            <img id="profile" src="{% static 'img/profile.png' %}" alt="profile-pic" class="img clip">
+          </div>
+          <div id="profile-description" class="col grid">
+            <ul>
+              <li>
+                <p>KTP : {{ ktp }}</p>
+              </li>
+              <li>
+                <p>Nama : {{ nama }}</p>
+              </li>
+              <li>
+                <p>Saldo : {{ saldo }}</p>
+              </li>
+              <li>
+                <p> Points : {{ poin }}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col grid">
+    <div class="card">
+      <h1 id="title">Transaksi</h1>
+      <div class="overscroll">
+        <div class="card grey">
+          <div class="col flex-center ui styled fluid accordion">
+            <div id="title" class="col grid title">
+              <div class="navbar">
+                <div class="col grid flex-start">
+                  <h3 id="title">Jenis</h3>
+                </div>
+                <div class="col grid flex-end">
+                  <p id="money-plus">10000</p>
+                  <p id="date">2019-04-03</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
