@@ -23,3 +23,5 @@ markdown
 django-filter
 django-debug-toolbar
 python-decouple
+django-cors-headers
+simplejson

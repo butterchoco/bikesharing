@@ -1,6 +1,17 @@
-<nav class="white">
+{% load static %}
+{% load staticfiles %}
+<nav class="navbar white">
   <i id="more" class="material-icons">view_headline</i>
   <div id="greetings" class="col grid flex-end">
-    <p>Hello, Ahmad</p>
+    <div class="flex-center navbar">
+      <p>Hello, {{ nama }}</p>
+      <img id="avatar" src="{% static 'img/avatar.png' %}" alt="avatar">
+    </div>
   </div>
 </nav>
+
+{% if role == "ANGGOTA" %}
+<div id="profileBar" class="card">
+  <p id="saldo">{{ saldo }}</p>
+</div>
+{% endif %}

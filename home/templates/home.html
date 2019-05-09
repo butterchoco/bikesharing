@@ -6,84 +6,114 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bikesharing</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/dropdown.css' %}">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Bikesharing</title>
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <link rel="stylesheet" href="{% static 'css/dropdown.css' %}">
 </head>
 
 <body>
-    <section id="page1">
-        <div id="ripplePlaceholder"></div>
-        <div class="row grid flex-center">
-            <div class="col grid-4"></div>
-            <div class="col grid-3 flex-center">
-                <h1 id="signup-title" hidden>Sign up Now !</h1>
-                <h1 id="signin-title" hidden>Sign in There !</h1>
-                <img id="logo" class="img-fluid clip" alt="Bootstrap Image Preview"
-                    src="{% static 'img/bike_animation.gif' %}" />
-            </div>
-            <div class="col grid-3">
-                <div id="description" class="m-1">
-                    <h3>ShareBike</h3>
-                    <p>
-                        ShareBike is an application to store everything you need about bike.
-                        <strong>You can manage your bike, station, transaction history, bike events, and so on.</strong>
-                        ShareBike allows you to lend a bike from many cities. There are some vouchers which you can get
-                        if you are lucky enough !.
-                    </p>
-                    <button id="signup-trans" data-color="green" class="btn white out-green transition">Sign up</button>
+        <section id="page1">
+                <div id="ripplePlaceholder"></div>
+                <div class="row grid flex-center">
+                        <div class="col grid-4"></div>
+                        <div class="col grid-3 flex-center">
+                                <img id="logo" class="img-fluid clip" alt="Bootstrap Image Preview"
+                                        src="{% static 'img/bike_animation.gif' %}" />
+                        </div>
+                        <div class="col grid-3">
+                                <div id="description" class="m-1">
+                                        <h3>ShareBike</h3>
+                                        <p>
+                                                ShareBike is an application to store everything you need about bike.
+                                                <strong>You can manage your bike, station, transaction history, bike
+                                                        events, and so on.</strong>
+                                                ShareBike allows you to lend a bike from many cities. There are some
+                                                vouchers which you can get
+                                                if you are lucky enough !.
+                                        </p>
+                                        <button id="signup-trans" data-color="green-light"
+                                                class="btn white out-green">Sign up</button>
+                                </div>
+                                <div id="signup-group" class="card" hidden>
+                                        <h1 id="signup-title" hidden>Sign up Now !</h1>
+                                        <h1 id="signin-title" hidden>Sign in There !</h1>
+                                        <form id="signup" method="POST" role="form">
+                                                {% csrf_token %}
+                                                <form id="signup" method="POST" role="form" hidden>
+                                                        <div id="alert"></div>
+                                                        <div class="form-group"><label for="id_ktp">No KTP</label>
+                                                                <div id="check-ktp" class="lds-ripple">
+                                                                        <input
+                                                                        type="text" class="form-control" id="id_ktp"
+                                                                        name="ktp" placeholder="your id card..." />
+                                                                        <span id="loading-ktp"></span>
+                                                                </div>
+                                                        </div>
+                                                        <div class="form-group"><label for="id_nama">Nama
+                                                                        Lengkap</label><input type="name"
+                                                                        class="form-control" id="id_nama" name="nama"
+                                                                        placeholder="your name..." /></div>
+                                                        <div class="form-group"><label for="id_email">Email
+                                                                        address</label>
+                                                                <div id="check-email" class="lds-ripple">
+                                                                        <input type="email"
+                                                                        class="form-control" id="id_email" name="email"
+                                                                        placeholder="your email..." />
+                                                                        <span id="loading-email"></span>
+                                                                </div>
+                                                        </div>
+                                                        <div class="form-group"><label for="id_tgl_lahir">Tanggal Lahir
+                                                                        address</label><input type="date"
+                                                                        class="form-control" id="id_tgl_lahir"
+                                                                        name="tgl_lahir"
+                                                                        placeholder="your phone number" />
+                                                        </div>
+                                                        <div class="form-group"><label for="id_no_telp">No.
+                                                                        Telepon</label><input type="text"
+                                                                        class="form-control" id="id_no_telp"
+                                                                        name="no_telp"
+                                                                        placeholder="your phone number" /></div>
+                                                        <div class="form-group"><label
+                                                                        for="id_alamat">Alamat</label><input type="text"
+                                                                        class="form-control" id="id_alamat"
+                                                                        name="alamat" placeholder="your address..." />
+                                                        </div>
+                                                        <select id="id_role" class="ui fluid dropdown">
+                                                                <option hidden value="">Role</option>
+                                                                <option value="ADMIN">ADMIN</option>
+                                                                <option value="ANGGOTA">ANGGOTA</option>
+                                                                <option value="PETUGAS">PETUGAS</option>
+                                                        </select>
+                                                        <button disabled id="submit" type="submit" class="btn green m-1">Sign
+                                                                up</button>
+                                                        <p>Already have account ? <a id="signin-trans">Sign in here.</a>
+                                                        </p>
+                                                </form>
+                                                <form role="form" id="signin" hidden>
+                                                        <div class="form-group"><label for="id_ktp_login">No
+                                                                        KTP</label><input type="text"
+                                                                        class="form-control" id="id_ktp_login"
+                                                                        placeholder="your id card..." /></div>
+                                                        <div class="form-group"><label for="id_email_login">Email
+                                                                        address</label><input type="email"
+                                                                        class="form-control" id="id_email_login"
+                                                                        placeholder="your email..." /></div>
+                                                        <button id="login" type="submit" class="btn green m-1">Sign
+                                                                in</button>
+                                                        <p>Don't Have Account ? <a id="signup-in-trans">Sign up now.</a>
+                                                        </p>
+                                                </form>
+                                </div>
+                        </div>
+                        <div class="col grid-4"></div>
                 </div>
-                <div id="signup-group" class="card" hidden>
-                    <form id="signup" method="POST" role="form">
-                        {% csrf_token %}
-                        <form id="signup" method="POST" role="form">
-                            <div class="form-group"><label for="id_ktp">No KTP</label><input type="text"
-                                    class="form-control" id="id_ktp" name="ktp" placeholder="your id card..." /></div>
-                            <div class="form-group"><label for="id_nama">Nama Lengkap</label><input type="name"
-                                    class="form-control" id="id_nama" name="nama" placeholder="your name..." /></div>
-                            <div class="form-group"><label for="id_email">Email address</label><input type="email"
-                                    class="form-control" id="id_email" name="email" placeholder="your email..." /></div>
-                            <div class="form-group"><label for="id_tgl_lahir">Tanggal Lahir
-                                    address</label><input type="date" class="form-control" id="id_tgl_lahir"
-                                    name="tgl_lahir" placeholder="your phone number" />
-                            </div>
-                            <div class="form-group"><label for="id_no_telp">No. Telepon</label><input type="text"
-                                    class="form-control" id="id_no_telp" name="no_telp"
-                                    placeholder="your phone number" /></div>
-                            <div class="form-group"><label for="id_alamat">Alamat</label><input type="text"
-                                    class="form-control" id="id_alamat" name="alamat" placeholder="your address..." />
-                            </div>
-                            <select id="id_role" class="ui fluid dropdown">
-                                <option hidden value="">Role</option>
-                                <option value="ADMIN">ADMIN</option>
-                                <option value="ANGGOTA">ANGGOTA</option>
-                                <option value="PETUGAS">PETUGAS</option>
-                            </select>
-                            <button id="submit_form" type="submit" class="btn green m-1">Sign
-                                up</button>
-                            <p>Already have account ? <a id="signin-trans" routerLink="/login">Sign in here.</a></p>
-                        </form>
-                        <form role="form" id="signin" hidden>
-                            <div class="form-group"><label for="exampleInputNoKTP1">No KTP</label><input type="text"
-                                    class="form-control" id="exampleInputNoKTP1" placeholder="your id card..." /></div>
-                            <div class="form-group"><label for="exampleInputEmail1">Email address</label><input
-                                    type="email" class="form-control" id="exampleInputEmail1"
-                                    placeholder="your email..." /></div>
-                            <button type="submit" class="btn green m-1">Sign in</button>
-                            <p>Don't Have Account ? <a id="signup-in-trans">Sign up now.</a></p>
-                        </form>
-                </div>
-            </div>
-            <div class="col grid-4"></div>
-        </div>
-    </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
-    <script src="{% static 'js/signup.js' %}"></script>
-    <script src="{% static 'js/dropdown.js' %}"></script>
-    <script src="{% static 'js/home.js' %}"></script>
+        </section>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+        <script src="{% static 'js/signup.js' %}"></script>
+        <script src="{% static 'js/home.js' %}"></script>
 </body>
 
 </html>

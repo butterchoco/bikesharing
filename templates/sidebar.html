@@ -15,21 +15,30 @@
 
 <body>
   <section class="container">
-
+    {% if ktp %}
     <div id="side">
-      <a href="/report">
-        <div class="row flex-center"><i class="material-icons md-light">assignment</i></div>
+      <a href="/">
+        <div class="row flex-center"><i class="material-icons md-light">dashboard</i></div>
       </a>
+      {% if role == "ANGGOTA" %}
+      <a href="/">
+        <div class="row flex-center"><i class="material-icons md-light">commute</i></div>
+      </a>
+      <a href="/">
+        <div class="row flex-center"><i class="material-icons md-light">motorcycle</i></div>
+      </a>
+      {% endif %}
       <a href="/transaction">
         <div class="row flex-center"><i class="material-icons md-light">compare_arrows</i></div>
       </a>
-      <a href="/">
-        <div class="row flex-center" hidden><i class="material-icons md-light">motorcycle</i></div>
+      <a href="/report">
+        <div class="row flex-center"><i class="material-icons md-light">assignment</i></div>
       </a>
-      <a href="/">
-        <div class="row flex-center" hidden><i class="material-icons md-light">commute</i></div>
+      {% if role == "PETUGAS" %}
+      {% endif %}
+      <a href="/user/logout">
+        <div class="row flex-center"><i class="material-icons md-light">power_settings_new</i></div>
       </a>
-      <div class="row flex-center"><i class="material-icons md-light">power_settings_new</i></div>
     </div>
 
     <div id="page-nav" class="grey">
@@ -37,6 +46,8 @@
       {% block content %}
       {% endblock %}
     </div>
+
+    {% endif %}
   </section>
 
   <script src="{% static 'js/page-nav.js' %}"></script>
