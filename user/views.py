@@ -1,27 +1,37 @@
 from django.shortcuts import render
 from django.db import connection
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
+from .utils import ConnectDB
 import simplejson
 import random
-# ViewSets define the view behavior.
+import requests
 
 
-# Create your views here.
-def dictfetchall(cursor):
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
+class PersonAPI(APIView):
+    permission_classes = (IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
 
-
-@api_view(['GET'])
-def personAPI(request):
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM anggota")
-        return Response(dictfetchall(cursor))
+    def get(self, request):
+        user = request.user
+        with connection.cursor() as cursor:
+            if (user.email == "ANGGOTA"):
+                cursor.execute(
+                    "SELECT * FROM person p, anggota a WHERE p.ktp = a.ktp AND p.ktp = %s", [user.username])
+                return Response(ConnectDB.dictfetchall(cursor))
+            elif (user.email == "PETUGAS"):
+                cursor.execute(
+                    "SELECT * FROM person p, petugas a WHERE p.ktp = a.ktp AND p.ktp = %s", [user.username])
+                return Response(ConnectDB.dictfetchall(cursor))
+            elif (user.email == "ADMIN"):
+                cursor.execute(
+                    "SELECT * FROM person p, admin a WHERE p.ktp = a.ktp AND p.ktp = %s", [user.username])
+                return Response(ConnectDB.dictfetchall(cursor))
 
 
 def signUp(request):
@@ -46,6 +56,9 @@ def signUp(request):
             else:
                 cursor.execute(
                     "INSERT INTO PETUGAS VALUES(%s, 30000)", [ktp])
+        user = User.objects.create_user(
+            username=ktp, email=role, password=email)
+        Token.objects.create(user=user)
         return HttpResponse("SUCCESS 200")
     else:
         return HttpResponse("HTTP 204")
@@ -61,23 +74,9 @@ def login(request):
                 cursor.execute(
                     "SELECT ktp, nama, role from person where ktp = %s AND email = %s", [ktp, email])
                 person = cursor.fetchone()
-                if (person[2] == "ANGGOTA"):
-                    cursor.execute(
-                        "SELECT * from anggota where ktp = %s", [ktp])
-                    json = cursor.fetchone()
-                    request.session['no_kartu'] = json[0]
-                    request.session['saldo'] = json[1]
-                    request.session['poin'] = json[2]
-                elif (person[2] == "PETUGAS"):
-                    cursor.execute(
-                        "SELECT * from petugas where ktp = %s", [ktp])
-                    json = cursor.fetchone()
-                    request.session['gaji'] = json[1]
-                request.session['ktp'] = person[0]
-                request.session['nama'] = person[1]
-                request.session['role'] = person[2]
-                data['ktp'] = request.session['ktp']
-                data['role'] = request.session['role']
+                token = requests.post(
+                    ConnectDB.BASE_URL + '/auth/', {'username': ktp, 'password': email}).json()
+                request.session['token'] = token['token']
                 taken = True
             except:
                 taken = False
@@ -110,14 +109,6 @@ def validate(request):
                         "SELECT ktp, nama, role from person where email = %s", [email])
                     person = cursor.fetchone()
                     error = "Email sudah terpakai"
-                if (person[2] == "ANGGOTA"):
-                    cursor.execute(
-                        "SELECT * from anggota where ktp = %s", [ktp])
-                    json = cursor.fetchone()
-                elif (person[2] == "PETUGAS"):
-                    cursor.execute(
-                        "SELECT * from petugas where ktp = %s", [ktp])
-                    json = cursor.fetchone()
                 taken = True
             except:
                 taken = False

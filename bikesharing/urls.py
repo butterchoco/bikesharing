@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import RedirectView
+from rest_framework.authtoken.views import obtain_auth_token
 from . import settings
 from .utils.routers import router
 
@@ -25,6 +26,7 @@ urlpatterns = [
     path('', RedirectView.as_view(url='home/')),
     path('admin/', admin.site.urls),
     path('router/', include(router.urls)),
+    path('auth/', obtain_auth_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('home/', include('home.urls', namespace='home')),
     path('user/', include('user.urls', namespace='registrasi')),

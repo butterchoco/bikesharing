@@ -36,6 +36,8 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:4200'
 )
 
+SESSION_COOKIE_HTTPONLY = True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'home',
     'user',
@@ -60,8 +63,8 @@ REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+        'rest_framework.permissions.AllowAny',
+    ],
 }
 
 MIDDLEWARE = [

@@ -49,7 +49,6 @@ profileBar.style.opacity = "0";
 
 avatar.onclick = function() {
 	toggleProfile = toggleProfile ^ 1;
-	console.log(toggleProfile);
 	if (toggleProfile == 1) {
 		profileBar.style.opacity = "1";
 	} else {

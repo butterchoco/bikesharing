@@ -58,6 +58,13 @@ nav {
 	flex-direction: row;
 }
 
+ul li {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: inherit;
+	padding: 5px;
+}
+
 #profile-description {
 	padding: 20px;
 }
@@ -287,6 +294,10 @@ input {
 
 .overscroll {
 	overflow-y: scroll;
+}
+
+.overscroll::-webkit-scrollbar {
+	width: 0 !important;
 }
 
 /*-------------- Spacing -------------*/
@@ -716,6 +727,7 @@ tr {
 @media only screen and (max-width: 800px) {
 	#page-nav {
 		min-height: 100%;
+		height: auto;
 		position: relative;
 		display: block;
 		transition: all 0.5s ease;
@@ -724,9 +736,7 @@ tr {
 	.card {
 		width: auto;
 		height: auto;
-		background-color: white;
-		color: #222;
-		padding: 20px;
+		padding: 10px;
 		margin: 10px;
 		border-radius: 2px;
 	}

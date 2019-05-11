@@ -1,4 +1,6 @@
 {% extends 'sidebar.html' %}
+{% load static %}
+{% load staticfiles%}
 
 {% block content %}
 
@@ -6,34 +8,27 @@
   <div class="col grid">
     <div class="card">
       <h1 id="title">Transaksi</h1>
+      {% if date_time %}
       <div class="card grey">
         <div class="col flex-center ui styled fluid accordion">
           <div id="title" class="col grid title">
             <div class="navbar">
               <div class="col grid flex-start">
-                <h3 id="title">Jenis</h3>
+                <h4 id="title">{{ jenis }}</h4>
               </div>
               <div class="col grid flex-end">
-                <p id="money-plus">10000</p>
-                <p id="date">2019-04-03</p>
+                <p id="money-plus">{{ nominal }}</p>
+                <p id="date">{{ date_time }}</p>
               </div>
             </div>
           </div>
-          <div id="description" class="content">
-            <p>Lorem ipsum dolor sit amet
-              consectetur,
-              adipisicing elit. Rerum, possimus eius
-              sed
-              distinctio alias
-              reprehenderit esse quibusdam fugit
-              accusantium
-              quam
-              laboriosam suscipit quod aspernatur et
-              asperiores! Cum
-              modi natus assumenda.</p>
-          </div>
         </div>
       </div>
+      {% else %}
+      <div class="flex-center">
+        <p>Tidak ada transaksi.</p>
+      </div>
+      {% endif %}
     </div>
   </div>
 </div>
@@ -53,4 +48,5 @@
   <i id="add" class="material-icons md-light">add</i>
 </div>
 
+<script src="{% static 'js/transaction.js' %}"></script>
 {% endblock %}

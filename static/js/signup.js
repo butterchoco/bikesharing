@@ -49,13 +49,13 @@ var successSignup = function() {
 };
 
 $("#submit").on("click", function(e) {
-	nama = $("#id_nama").val();
-	ktp = $("#id_ktp").val();
-	email = $("#id_email").val();
-	tgl_lahir = $("#id_tgl_lahir").val();
-	no_telp = $("#id_no_telp").val();
-	alamat = $("#id_alamat").val();
-	role = $("#id_role").val();
+	let nama = $("#id_nama").val();
+	let ktp = $("#id_ktp").val();
+	let email = $("#id_email").val();
+	let tgl_lahir = $("#id_tgl_lahir").val();
+	let no_telp = $("#id_no_telp").val();
+	let alamat = $("#id_alamat").val();
+	let role = $("#id_role").val();
 	$.ajax({
 		method: "POST",
 		url: "/user/signing+up/",
@@ -78,15 +78,15 @@ $("#submit").on("click", function(e) {
 });
 
 $("#login").on("click", function(e) {
-	ktp = $("#id_ktp_login").val();
-	email = $("#id_email_login").val();
+	let ktpLogin = $("#id_ktp_login").val();
+	let emailLogin = $("#id_email_login").val();
 	$.ajax({
 		method: "POST",
 		url: "/user/authenticating/",
 		type: "json",
 		data: {
-			ktp: ktp,
-			email: email
+			ktp: ktpLogin,
+			email: emailLogin
 		},
 		success: function(data) {
 			if (data.is_taken) {
@@ -100,16 +100,12 @@ $("#login").on("click", function(e) {
 });
 
 $("#id_ktp").on("focusin", function() {
-	ktp = $("#id_ktp").val();
-	email = $("#id_email").val();
 	$("#loading-ktp").html(
 		"<div class='loading'></div><div class='loading'></div>"
 	);
 });
 
 $("#id_email").on("focusin", function() {
-	ktp = $("#id_ktp").val();
-	email = $("#id_email").val();
 	$("#loading-email").html(
 		"<div class='loading'></div><div class='loading'></div>"
 	);
@@ -190,24 +186,22 @@ $("select").on("change", function() {
 });
 
 $("input").on("keyup", function() {
-	ktp = $("#id_ktp").val();
-	email = $("#id_email").val();
-	ktp = $("#id_ktp").val();
-	email = $("#id_email").val();
-	nama = $("#id_nama").val();
-	alamat = $("#id_alamat").val();
-	tgl_lahir = $("#id_tgl_lahir").val();
-	role = $("#id_role").val();
-	no_telp = $("#id_no_telp").val();
+	let ktpsignup = $("#id_ktp").val();
+	let emailsignup = $("#id_email").val();
+	let namasignup = $("#id_nama").val();
+	let alamatsignup = $("#id_alamat").val();
+	let tgl_lahirsignup = $("#id_tgl_lahir").val();
+	let rolesignup = $("#id_role").val();
+	let no_telpsignup = $("#id_no_telp").val();
 
 	if (
-		ktp == "" ||
-		email == "" ||
-		nama == "" ||
-		alamat == "" ||
-		tgl_lahir == "" ||
-		role == "" ||
-		no_telp == ""
+		ktpsignup === "" ||
+		emailsignup === "" ||
+		namasignup === "" ||
+		alamatsignup === "" ||
+		tgl_lahirsignup === "" ||
+		rolesignup === "" ||
+		no_telpsignup === ""
 	) {
 		$("#submit").prop("disabled", true);
 	} else {

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import signUp, login, validate, logout, personAPI
+from .views import signUp, login, validate, logout, PersonAPI
 
 app_name = "registrasi"
 urlpatterns = [
@@ -7,5 +7,5 @@ urlpatterns = [
     path('authenticating/', login),
     path('validating/', validate),
     path('logout/', logout),
-    path('person/', personAPI)
+    path('api/', PersonAPI.as_view())
 ]

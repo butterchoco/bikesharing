@@ -1,20 +1,20 @@
 from django.shortcuts import render
+from user.utils import ConnectDB
+import requests
 
 # Create your views here.
-response = {}
 
 
 def index(request):
-    if ('ktp' in request.session.keys()):
-        response['ktp'] = request.session['ktp']
-        response['nama'] = request.session['nama']
-        response['role'] = request.session['role']
-        if (request.session['role'] == "ANGGOTA"):
-            response['no_kartu'] = request.session['no_kartu']
-            response['saldo'] = request.session['saldo']
-            response['poin'] = request.session['poin']
-        elif (request.session['role'] == "PETUGAS"):
-            response['gaji'] = request.session['gaji']
+    if ('token' in request.session.keys()):
+        headers = {'Authorization': 'Token ' + request.session['token']}
+        dataPerson = requests.get(
+            ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
+        dataTransaksi = requests.get(
+            ConnectDB.BASE_URL + '/transaction/api/', headers=headers).json()
+        if (len(dataTransaksi) != 0):
+            dataPerson[0].update(dataTransaksi[0])
+        response = dataPerson[0]
         return render(request, 'dashboard.html', response)
     else:
-        return render(request, 'home.html', response)
+        return render(request, 'home.html')
