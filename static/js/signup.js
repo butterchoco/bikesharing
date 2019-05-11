@@ -29,6 +29,25 @@ $.ajaxSetup({
 	}
 });
 
+var successSignup = function() {
+	ktp = $("#id_ktp").val();
+	email = $("#id_email").val();
+	$.ajax({
+		method: "POST",
+		url: "/user/authenticating/",
+		type: "json",
+		data: {
+			ktp: ktp,
+			email: email
+		},
+		success: function(data) {
+			if (data.is_taken) {
+				location.reload(true);
+			}
+		}
+	});
+};
+
 $("#submit").on("click", function(e) {
 	nama = $("#id_nama").val();
 	ktp = $("#id_ktp").val();
@@ -52,6 +71,7 @@ $("#submit").on("click", function(e) {
 		},
 		success: function(data) {
 			alert("success");
+			successSignup();
 		}
 	});
 	event.preventDefault();
@@ -69,9 +89,8 @@ $("#login").on("click", function(e) {
 			email: email
 		},
 		success: function(data) {
-			console.log(data);
 			if (data.is_taken) {
-				window.location.href = "/report";
+				location.reload(true);
 			} else {
 				alert("Salah memasukkan ktp atau email.");
 			}
@@ -80,7 +99,7 @@ $("#login").on("click", function(e) {
 	event.preventDefault();
 });
 
-$("#id_ktp").on("keyup", function() {
+$("#id_ktp").on("focusin", function() {
 	ktp = $("#id_ktp").val();
 	email = $("#id_email").val();
 	$("#loading-ktp").html(
@@ -88,7 +107,7 @@ $("#id_ktp").on("keyup", function() {
 	);
 });
 
-$("#id_email").on("keyup", function() {
+$("#id_email").on("focusin", function() {
 	ktp = $("#id_ktp").val();
 	email = $("#id_email").val();
 	$("#loading-email").html(
@@ -96,7 +115,55 @@ $("#id_email").on("keyup", function() {
 	);
 });
 
-$("input").on("keyup", function() {
+$("#id_ktp").on("focusout", function() {
+	ktp = $("#id_ktp").val();
+	email = $("#id_email").val();
+	$.ajax({
+		method: "POST",
+		url: "/user/validating/",
+		type: "json",
+		data: {
+			ktp: ktp,
+			email: email
+		},
+		success: function(data) {
+			if (data.is_taken) {
+				$("#alert").html("<div class='alert'>" + data.error + "</div>");
+				$("#submit").prop("disabled", true);
+			} else {
+				$("#alert").html("");
+			}
+			$("#loading-ktp").html("");
+		}
+	});
+	event.preventDefault();
+});
+
+$("#id_email").on("focusout", function() {
+	ktp = $("#id_ktp").val();
+	email = $("#id_email").val();
+	$.ajax({
+		method: "POST",
+		url: "/user/validating/",
+		type: "json",
+		data: {
+			ktp: ktp,
+			email: email
+		},
+		success: function(data) {
+			if (data.is_taken) {
+				$("#alert").html("<div class='alert'>" + data.error + "</div>");
+				$("#submit").prop("disabled", true);
+			} else {
+				$("#alert").html("");
+			}
+			$("#loading-email").html("");
+		}
+	});
+	event.preventDefault();
+});
+
+$("select").on("change", function() {
 	ktp = $("#id_ktp").val();
 	email = $("#id_email").val();
 	ktp = $("#id_ktp").val();
@@ -104,7 +171,7 @@ $("input").on("keyup", function() {
 	nama = $("#id_nama").val();
 	alamat = $("#id_alamat").val();
 	tgl_lahir = $("#id_tgl_lahir").val();
-	role = $("id_role").val();
+	role = $("#id_role").val();
 	no_telp = $("#id_no_telp").val();
 
 	if (
@@ -120,28 +187,30 @@ $("input").on("keyup", function() {
 	} else {
 		$("#submit").prop("disabled", false);
 	}
-	$.ajax({
-		method: "POST",
-		url: "/user/validating/",
-		type: "json",
-		data: {
-			ktp: ktp,
-			email: email
-		},
-		success: function(data) {
-			if (data.is_taken) {
-				$("#alert").html(
-					"<div class='alert'>Ktp atau email sudah terpakai.</div>"
-				);
-				$("#loading-ktp").html("");
-				$("#loading-email").html("");
-				$("#submit").prop("disabled", true);
-			} else {
-				$("#alert").html("");
-				$("#loading-ktp").html("");
-				$("#loading-email").html("");
-			}
-		}
-	});
-	event.preventDefault();
+});
+
+$("input").on("keyup", function() {
+	ktp = $("#id_ktp").val();
+	email = $("#id_email").val();
+	ktp = $("#id_ktp").val();
+	email = $("#id_email").val();
+	nama = $("#id_nama").val();
+	alamat = $("#id_alamat").val();
+	tgl_lahir = $("#id_tgl_lahir").val();
+	role = $("#id_role").val();
+	no_telp = $("#id_no_telp").val();
+
+	if (
+		ktp == "" ||
+		email == "" ||
+		nama == "" ||
+		alamat == "" ||
+		tgl_lahir == "" ||
+		role == "" ||
+		no_telp == ""
+	) {
+		$("#submit").prop("disabled", true);
+	} else {
+		$("#submit").prop("disabled", false);
+	}
 });
