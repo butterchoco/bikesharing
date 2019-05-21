@@ -8,6 +8,7 @@ import requests
 def index(request):
     if ('token' in request.session.keys()):
         headers = {'Authorization': 'Token ' + request.session['token']}
+        print(headers)
         dataPerson = requests.get(
             ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
         dataTransaksi = requests.get(
