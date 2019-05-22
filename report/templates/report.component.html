@@ -1,0 +1,21 @@
+{% if id_laporan %}
+<div class="card grey">
+  <div class="col flex-center ui styled fluid accordion">
+    <div id="title" class="col grid title">
+      <div class="navbar">
+        <div class="col grid flex-start">
+          <h4 id="title">{{ id_laporan }}</h4>
+          <p id="description">Nomor sepeda : {{ no_sepeda }} sedang di{{ status }}</p>
+        </div>
+        <div class="col grid flex-end">
+          <p id="date">{{ datetime_pinjam }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="flex-center">
+  <p>Tidak ada laporan.</p>
+</div>
+{% endif %}

@@ -1,0 +1,21 @@
+{% if date_time %}
+<div class="card grey">
+  <div class="col flex-center ui styled fluid accordion">
+    <div id="title" class="col grid title">
+      <div class="navbar">
+        <div class="col grid flex-start">
+          <h4 id="title">{{ jenis }}</h4>
+        </div>
+        <div class="col grid flex-end">
+          <p id="money-plus">{{ nominal }}</p>
+          <p id="date">{{ date_time }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="flex-center">
+  <p>Tidak ada transaksi.</p>
+</div>
+{% endif %}

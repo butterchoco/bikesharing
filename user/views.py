@@ -32,6 +32,8 @@ class PersonAPI(APIView):
                 cursor.execute(
                     "SELECT * FROM person p, admin a WHERE p.ktp = a.ktp AND p.ktp = %s", [user.username])
                 return Response(ConnectDB.dictfetchall(cursor))
+            else:
+                return HttpResponse("Cannot define user type.")
 
 
 def signUp(request):

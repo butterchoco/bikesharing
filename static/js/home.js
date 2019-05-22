@@ -7,8 +7,9 @@ $(document).ready(function() {
 	let signinTitle = document.getElementById("signin-title");
 
 	let signupTrans = document.getElementById("signup-trans");
+	let loginTrans = document.getElementById("login-trans");
 	let description = document.getElementById("description");
-	let signupGroup = document.getElementById("signup-group");
+	let formCard = document.getElementById("form-card");
 	let page1 = document.getElementById("page1");
 
 	signupTrans.addEventListener("click", function() {
@@ -16,11 +17,25 @@ $(document).ready(function() {
 			page1.style.height = "150%";
 			page1.style.overflowY = "scroll";
 		}
-		signupGroup.classList.add("slide-up");
+		formCard.classList.add("slide-up");
 		description.classList.add("fade-out");
-		signupTitle.hidden = false;
-		signupGroup.hidden = false;
 		description.hidden = true;
+		formCard.hidden = false;
+		signupTitle.hidden = false;
+		signup.hidden = false;
+	});
+
+	loginTrans.addEventListener("click", function() {
+		if (window.innerWidth < 800) {
+			page1.style.height = "150%";
+			page1.style.overflowY = "scroll";
+		}
+		formCard.classList.add("slide-up");
+		description.classList.add("fade-out");
+		description.hidden = true;
+		formCard.hidden = false;
+		signinTitle.hidden = false;
+		signin.hidden = false;
 	});
 
 	// Dari SignIn form ke SignUp form
