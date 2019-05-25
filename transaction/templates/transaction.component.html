@@ -1,0 +1,23 @@
+{% if transaksi|length > 0 %}
+{% for data in transaksi %}
+<div class="card grey">
+  <div class="col flex-center ui styled fluid accordion">
+    <div class="col grid">
+      <div class="navbar">
+        <div class="col grid flex-start">
+          <h4 id="title">{{ data.jenis }}</h4>
+        </div>
+        <div class="col grid flex-end">
+          <p id="money-plus">{{ data.nominal }}</p>
+          <p id="date">{{ data.date_time }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="flex-center">
+  <p>Tidak ada transaksi.</p>
+</div>
+{% endif %}

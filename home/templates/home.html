@@ -11,15 +11,15 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Bikesharing</title>
         <link rel="stylesheet" href="{% static 'css/home.css' %}">
-        <link rel="stylesheet" href="{% static 'css/dropdown.css' %}">
 </head>
 
 <body>
         <section id="page1">
-                <div id="ripplePlaceholder"></div>
+                <div id="loading-screen" class="sk-circle"></div>
                 <div class="row grid flex-center">
                         <div class="col grid-4"></div>
                         <div class="col grid-3 flex-center">
+                                <div class="alert"></div>
                                 <img id="logo" class="img-fluid clip" alt="Bootstrap Image Preview"
                                         src="{% static 'img/bike_animation.gif' %}" />
                         </div>
@@ -36,82 +36,19 @@
                                         </p>
                                         <button id="signup-trans" data-color="green-light"
                                                 class="btn white out-green">Sign up</button>
+                                        <button id="login-trans" data-color="green-light"
+                                                class="btn white out-green">Login</button>
                                 </div>
-                                <div id="signup-group" class="card" hidden>
-                                        <h1 id="signup-title" hidden>Sign up Now !</h1>
-                                        <h1 id="signin-title" hidden>Sign in There !</h1>
-                                        <form id="signup" method="POST" role="form">
-                                                {% csrf_token %}
-                                                <form id="signup" method="POST" role="form" hidden>
-                                                        <div id="alert"></div>
-                                                        <div class="form-group"><label for="id_ktp">No KTP</label>
-                                                                <div id="check-ktp" class="lds-ripple">
-                                                                        <input
-                                                                        type="text" class="form-control" id="id_ktp"
-                                                                        name="ktp" placeholder="your id card..." />
-                                                                        <span id="loading-ktp"></span>
-                                                                </div>
-                                                        </div>
-                                                        <div class="form-group"><label for="id_nama">Nama
-                                                                        Lengkap</label><input type="name"
-                                                                        class="form-control" id="id_nama" name="nama"
-                                                                        placeholder="your name..." /></div>
-                                                        <div class="form-group"><label for="id_email">Email
-                                                                        address</label>
-                                                                <div id="check-email" class="lds-ripple">
-                                                                        <input type="email"
-                                                                        class="form-control" id="id_email" name="email"
-                                                                        placeholder="your email..." />
-                                                                        <span id="loading-email"></span>
-                                                                </div>
-                                                        </div>
-                                                        <div class="form-group"><label for="id_tgl_lahir">Tanggal Lahir
-                                                                        address</label><input type="date"
-                                                                        class="form-control" id="id_tgl_lahir"
-                                                                        name="tgl_lahir"
-                                                                        placeholder="your phone number" />
-                                                        </div>
-                                                        <div class="form-group"><label for="id_no_telp">No.
-                                                                        Telepon</label><input type="text"
-                                                                        class="form-control" id="id_no_telp"
-                                                                        name="no_telp"
-                                                                        placeholder="your phone number" /></div>
-                                                        <div class="form-group"><label
-                                                                        for="id_alamat">Alamat</label><input type="text"
-                                                                        class="form-control" id="id_alamat"
-                                                                        name="alamat" placeholder="your address..." />
-                                                        </div>
-                                                        <select id="id_role" class="ui fluid dropdown">
-                                                                <option hidden value="">Role</option>
-                                                                <option value="ADMIN">ADMIN</option>
-                                                                <option value="ANGGOTA">ANGGOTA</option>
-                                                                <option value="PETUGAS">PETUGAS</option>
-                                                        </select>
-                                                        <button disabled id="submit" type="submit" class="btn green m-1">Sign
-                                                                up</button>
-                                                        <p>Already have account ? <a id="signin-trans">Sign in here.</a>
-                                                        </p>
-                                                </form>
-                                                <form role="form" id="signin" hidden>
-                                                        <div class="form-group"><label for="id_ktp_login">No
-                                                                        KTP</label><input type="text"
-                                                                        class="form-control" id="id_ktp_login"
-                                                                        placeholder="your id card..." /></div>
-                                                        <div class="form-group"><label for="id_email_login">Email
-                                                                        address</label><input type="email"
-                                                                        class="form-control" id="id_email_login"
-                                                                        placeholder="your email..." /></div>
-                                                        <button id="login" type="submit" class="btn green m-1">Sign
-                                                                in</button>
-                                                        <p>Don't Have Account ? <a id="signup-in-trans">Sign up now.</a>
-                                                        </p>
-                                                </form>
+                                <div id="form-card" class="card" hidden>
+                                        {% include 'user.component/signup.component.html' %}
+                                        {% include 'user.component/login.component.html' %}
                                 </div>
                         </div>
                         <div class="col grid-4"></div>
                 </div>
         </section>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
+        <script src="{% static 'js/login.js' %}"></script>
         <script src="{% static 'js/signup.js' %}"></script>
         <script src="{% static 'js/home.js' %}"></script>
 </body>

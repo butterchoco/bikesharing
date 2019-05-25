@@ -13,7 +13,7 @@
         <img id="logo" class="img-fluid" alt="Bootstrap Image Preview" src="{% static 'img/acara.gif' %}" />
     </div>
     <div class="col grid-3">
-        <div id="signup-group" class="card">
+        <div class="card">
             <form id="signup" method="POST" role="form">
                 {% csrf_token %}
                 {{ form }}

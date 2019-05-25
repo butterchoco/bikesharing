@@ -1,50 +1,26 @@
 {% extends 'sidebar.html' %}
+{% load static %}
+{% load staticfiles%}
 
 {% block content %}
 
 <div class="row">
   <div class="col grid">
-    <div class="card">
+    <div id="riwayat-transaksi" class="card">
       <h1 id="title">Transaksi</h1>
-      <div class="card grey">
-        <div class="col flex-center ui styled fluid accordion">
-          <div id="title" class="col grid title">
-            <div class="navbar">
-              <div class="col grid flex-start">
-                <h3 id="title">Jenis</h3>
-              </div>
-              <div class="col grid flex-end">
-                <p id="money-plus">10000</p>
-                <p id="date">2019-04-03</p>
-              </div>
-            </div>
-          </div>
-          <div id="description" class="content">
-            <p>Lorem ipsum dolor sit amet
-              consectetur,
-              adipisicing elit. Rerum, possimus eius
-              sed
-              distinctio alias
-              reprehenderit esse quibusdam fugit
-              accusantium
-              quam
-              laboriosam suscipit quod aspernatur et
-              asperiores! Cum
-              modi natus assumenda.</p>
-          </div>
-        </div>
-      </div>
+      {% include 'transaction.component.html' %}
     </div>
   </div>
 </div>
 
-<div id="myModal" class="modal">
+<div id="modal-transaction" class="modal">
   <div class="modal-content">
     <form method="post">
+      {% csrf_token %}
       <div class="form-group"><label for="id_nominal_topup">Nominal Top up</label><input type="number"
           class="form-control" id="id_nominal_topup" placeholder="How much..." /></div>
-      <button id="topup_submit" type="submit" class="btn green m-1">Add</button>
     </form>
+    <button id="topup-submit" class="btn green m-1">Add</button>
   </div>
 
 </div>
@@ -53,4 +29,5 @@
   <i id="add" class="material-icons md-light">add</i>
 </div>
 
+<script src="{% static 'js/transaction.js' %}"></script>
 {% endblock %}
