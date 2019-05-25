@@ -20,7 +20,7 @@ class TransactionAPI(APIView):
         with connection.cursor() as cursor:
             if (user.email == "ANGGOTA"):
                 cursor.execute(
-                    "SELECT * FROM anggota a, transaksi t, person p WHERE p.ktp = a.ktp AND a.no_kartu = t.no_kartu_anggota AND p.ktp = %s", [user.username])
+                    "SELECT t.* FROM transaksi t, anggota a, person p WHERE p.ktp = a.ktp AND a.no_kartu = t.no_kartu_anggota AND p.ktp = %s", [user.username])
                 return Response(ConnectDB.dictfetchall(cursor))
 
 
@@ -29,11 +29,12 @@ def transaction_view(request):
     headers = {'Authorization': 'Token ' + request.session['token']}
     dataTransaksi = requests.get(
         ConnectDB.BASE_URL + '/transaction/api/', headers=headers).json()
-    response.update(dataTransaksi[0])
-    if (len(dataTransaksi) == 0):
-        dataPerson = requests.get(
-            ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
-        response.update(dataPerson[0])
+    dataPerson = requests.get(
+        ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
+    response.update(dataPerson[0])
+    response['transaksi'] = []
+    for data in dataTransaksi:
+        response['transaksi'].append(data)
     return render(request, 'transaction.html', response)
 
 

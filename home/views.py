@@ -16,10 +16,12 @@ def index(request):
         dataPerson = requests.get(
             ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
         response.update(dataPerson[0])
-        if (len(dataTransaksi) != 0):
-            response.update(dataTransaksi[0])
-        if (len(dataLaporan) != 0):
-            response.update(dataLaporan[0])
+        response['laporan'] = []
+        response['transaksi'] = []
+        for data in dataLaporan:
+            response['laporan'].append(data)
+        for data in dataTransaksi:
+            response['transaksi'].append(data)
         return render(request, 'dashboard.html', response)
     else:
         return render(request, 'home.html')

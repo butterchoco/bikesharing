@@ -26,7 +26,7 @@ function ripple(e) {
 	transitionEffect.style.top = e.clientY - this.offsetTop - d / 2 + "px";
 }
 
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("modal-transaction");
 
 var modalbtn = document.getElementsByClassName("modal-btn");
 

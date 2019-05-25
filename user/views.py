@@ -95,37 +95,34 @@ def validate(request):
         email = request.POST.get('email', False)
         data = {}
         with connection.cursor() as cursor:
-            try:
-                if (ktp == "" and email == ""):
-                    error = ""
-                    taken = False
-                elif (ktp != ""):
-                    cursor.execute(
-                        "SELECT ktp, nama, role from person where ktp = %s", [ktp])
-                    person = cursor.fetchone()
+            error = ""
+            taken = False
+            if (ktp != ""):
+                cursor.execute(
+                    "SELECT ktp, nama, role from person where ktp = %s", [ktp])
+                person = cursor.fetchone()
+                if (person is not None):
                     error = "Ktp sudah terpakai"
                     taken = True
-                elif (email != ""):
-                    cursor.execute(
-                        "SELECT ktp, nama, role from person where email = %s", [email])
-                    person = cursor.fetchone()
+            elif (email != ""):
+                cursor.execute(
+                    "SELECT ktp, nama, role from person where email = %s", [email])
+                person = cursor.fetchone()
+                if (person is not None):
                     error = "Email sudah terpakai"
                     taken = True
-                else:
-                    cursor.execute(
-                        "SELECT ktp, nama, role from person where ktp = %s OR email = %s", [ktp, email])
-                    person = cursor.fetchone()
+            else:
+                cursor.execute(
+                    "SELECT ktp, nama, role from person where ktp = %s OR email = %s", [ktp, email])
+                person = cursor.fetchone()
+                if (person is not None):
                     error = "Ktp atau email sudah terpakai"
                     taken = True
-            except:
-                taken = False
-                error = ""
-            finally:
-                data = {
-                    'is_taken': taken,
-                    'error': error
-                }
-                return JsonResponse(data)
+            data = {
+                'is_taken': taken,
+                'error': error
+            }
+            return JsonResponse(data)
     else:
         return HttpResponse("HTTP 204")
 

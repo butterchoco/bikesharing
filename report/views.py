@@ -19,7 +19,7 @@ class ReportAPI(APIView):
         with connection.cursor() as cursor:
             if (user.email == "ANGGOTA"):
                 cursor.execute(
-                    "SELECT * FROM anggota a, laporan t, person p WHERE p.ktp = a.ktp AND a.no_kartu = t.no_kartu_anggota AND p.ktp = %s", [user.username])
+                    "SELECT l.* FROM anggota a, laporan l, person p WHERE p.ktp = a.ktp AND a.no_kartu = l.no_kartu_anggota AND p.ktp = %s", [user.username])
                 return Response(ConnectDB.dictfetchall(cursor))
 
 
@@ -28,9 +28,9 @@ def report_view(request):
     headers = {'Authorization': 'Token ' + request.session['token']}
     dataLaporan = requests.get(
         ConnectDB.BASE_URL + '/report/api/', headers=headers).json()
-    response.update(dataLaporan[0])
-    if (len(dataLaporan) == 0):
-        dataPerson = requests.get(
-            ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
-        response.update(dataPerson[0])
+    dataPerson = requests.get(
+        ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
+    response['laporan'] = []
+    for data in dataLaporan:
+        response['laporan'].append(data)
     return render(request, 'report.html', response)

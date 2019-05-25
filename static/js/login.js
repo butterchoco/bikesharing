@@ -29,6 +29,12 @@ $.ajaxSetup({
 	}
 });
 
+$("#signin-trans").on("click", function() {
+	$(".alert").html("");
+	$("#id_ktp_login").val("");
+	$("#id_email_login").val("");
+});
+
 $("#login").on("click", function(e) {
 	let ktpLogin = $("#id_ktp_login").val();
 	let emailLogin = $("#id_email_login").val();
@@ -49,7 +55,7 @@ $("#login").on("click", function(e) {
 			} else {
 				$("#loading-screen").html("");
 				$(".alert").html(
-					"<div class='alert-msg'>Salah memasukkan ktp atau email.</div>"
+					"<div id='alert-msg'>Salah memasukkan ktp atau email.</div>"
 				);
 			}
 		}

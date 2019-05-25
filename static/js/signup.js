@@ -48,6 +48,60 @@ var successSignup = function() {
 	});
 };
 
+var validate = function() {
+	ktp = $("#id_ktp").val();
+	email = $("#id_email").val();
+	if ($("#id_ktp").is(":focus")) {
+		$("#loading-ktp").html(
+			'<div class="sk-circle1 sk-child"></div><div class="sk-circle2 sk-child"></div><div class="sk-circle3 sk-child"></div><div class="sk-circle4 sk-child"></div><div class="sk-circle5 sk-child"></div><div class="sk-circle6 sk-child"></div><div class="sk-circle7 sk-child"></div><div class="sk-circle8 sk-child"></div><div class="sk-circle9 sk-child"></div><div class="sk-circle10 sk-child"></div><div class="sk-circle11 sk-child"></div><div class="sk-circle12 sk-child"></div>'
+		);
+	} else if ($("#id_email").is(":focus")) {
+		$("#loading-email").html(
+			'<div class="sk-circle1 sk-child"></div><div class="sk-circle2 sk-child"></div><div class="sk-circle3 sk-child"></div><div class="sk-circle4 sk-child"></div><div class="sk-circle5 sk-child"></div><div class="sk-circle6 sk-child"></div><div class="sk-circle7 sk-child"></div><div class="sk-circle8 sk-child"></div><div class="sk-circle9 sk-child"></div><div class="sk-circle10 sk-child"></div><div class="sk-circle11 sk-child"></div><div class="sk-circle12 sk-child"></div>'
+		);
+	}
+	$.ajax({
+		method: "POST",
+		url: "/user/validating/",
+		type: "json",
+		data: {
+			ktp: ktp,
+			email: email
+		},
+		success: function(data) {
+			if (data.is_taken) {
+				$(".alert").html("<div id='alert-msg'>" + data.error + "</div>");
+				$("#submit").prop("disabled", true);
+			} else {
+				$(".alert").html("");
+			}
+			if (ktp != "" && email != "") {
+				$("#loading-ktp").html("");
+				$("#loading-email").html("");
+			} else if (email != "") {
+				$("#loading-email").html("");
+			} else if (ktp != "") {
+				$("#loading-ktp").html("");
+			} else if (ktp == "" && email == "") {
+				$("#loading-ktp").html("");
+				$("#loading-email").html("");
+			}
+		}
+	});
+	event.preventDefault();
+};
+
+$("#signup-in-trans").on("click", function() {
+	$(".alert").html("");
+	$("#id_nama").val("");
+	$("#id_ktp").val("");
+	$("#id_email").val("");
+	$("#id_tgl_lahir").val("");
+	$("#id_no_telp").val("");
+	$("#id_alamat").val("");
+	$("#id_role").val("");
+});
+
 $("#submit").on("click", function(e) {
 	let nama = $("#id_nama").val();
 	let ktp = $("#id_ktp").val();
@@ -72,66 +126,6 @@ $("#submit").on("click", function(e) {
 		success: function(data) {
 			alert("success");
 			successSignup();
-		}
-	});
-	event.preventDefault();
-});
-
-$("#id_ktp").on("focusin", function() {
-	$("#loading-ktp").html(
-		'<div class="sk-circle1 sk-child"></div><div class="sk-circle2 sk-child"></div><div class="sk-circle3 sk-child"></div><div class="sk-circle4 sk-child"></div><div class="sk-circle5 sk-child"></div><div class="sk-circle6 sk-child"></div><div class="sk-circle7 sk-child"></div><div class="sk-circle8 sk-child"></div><div class="sk-circle9 sk-child"></div><div class="sk-circle10 sk-child"></div><div class="sk-circle11 sk-child"></div><div class="sk-circle12 sk-child"></div>'
-	);
-});
-
-$("#id_email").on("focusin", function() {
-	$("#loading-email").html(
-		'<div class="sk-circle1 sk-child"></div><div class="sk-circle2 sk-child"></div><div class="sk-circle3 sk-child"></div><div class="sk-circle4 sk-child"></div><div class="sk-circle5 sk-child"></div><div class="sk-circle6 sk-child"></div><div class="sk-circle7 sk-child"></div><div class="sk-circle8 sk-child"></div><div class="sk-circle9 sk-child"></div><div class="sk-circle10 sk-child"></div><div class="sk-circle11 sk-child"></div><div class="sk-circle12 sk-child"></div>'
-	);
-});
-
-$("#id_ktp").on("focusout", function() {
-	ktp = $("#id_ktp").val();
-	email = $("#id_email").val();
-	$.ajax({
-		method: "POST",
-		url: "/user/validating/",
-		type: "json",
-		data: {
-			ktp: ktp,
-			email: email
-		},
-		success: function(data) {
-			if (data.is_taken) {
-				$(".alert").html("<div class='alert-msg'>" + data.error + "</div>");
-				$("#submit").prop("disabled", true);
-			} else {
-				$(".alert").html("");
-			}
-			$("#loading-ktp").html("");
-		}
-	});
-	event.preventDefault();
-});
-
-$("#id_email").on("focusout", function() {
-	ktp = $("#id_ktp").val();
-	email = $("#id_email").val();
-	$.ajax({
-		method: "POST",
-		url: "/user/validating/",
-		type: "json",
-		data: {
-			ktp: ktp,
-			email: email
-		},
-		success: function(data) {
-			if (data.is_taken) {
-				$(".alert").html("<div class='alert-msg'>" + data.error + "</div>");
-				$("#submit").prop("disabled", true);
-			} else {
-				$(".alert").html("");
-			}
-			$("#loading-email").html("");
 		}
 	});
 	event.preventDefault();
@@ -185,4 +179,6 @@ $("input").on("keyup", function() {
 	} else {
 		$("#submit").prop("disabled", false);
 	}
+
+	validate();
 });

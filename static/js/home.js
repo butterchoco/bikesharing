@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 	// Dari SignIn form ke SignUp form
 	let signupInTrans = document.getElementById("signup-in-trans");
-	signupInTrans.addEventListener("click", function() {
+	$("#signup-in-trans").on("click", function() {
 		signin.classList.add("fade-out");
 		signup.classList.add("fade-in");
 		signupTitle.hidden = false;
@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 	// Dari SignUp form ke SignIn form
 	let signinTrans = document.getElementById("signin-trans");
-	signinTrans.addEventListener("click", function() {
+	$("#signin-trans").on("click", function() {
 		signup.classList.add("fade-out");
 		signin.classList.add("fade-in");
 		signinTitle.hidden = false;
