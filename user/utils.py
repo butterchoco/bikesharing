@@ -1,5 +1,5 @@
 class ConnectDB:
-    BASE_URL = 'http://127.0.0.1:8000'
+    BASE_URL = 'http://c6-basdat-bikesharing.herokuapp.com'
 
     def dictfetchall(cursor):
         columns = [col[0] for col in cursor.description]
