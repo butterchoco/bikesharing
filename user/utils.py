@@ -1,5 +1,12 @@
+import os
+
+
 class ConnectDB:
-    BASE_URL = 'http://c6-basdat-bikesharing.herokuapp.com'
+    PRODUCTION = os.environ.get('DATABASE_URL') != None
+    if (PRODUCTION):
+        BASE_URL = 'http://c6-basdat-bikesharing.herokuapp.com'
+    else:
+        BASE_URL = 'http://127.0.0.1:8000'
 
     def dictfetchall(cursor):
         columns = [col[0] for col in cursor.description]
