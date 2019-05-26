@@ -73,11 +73,9 @@ def login(request):
         data = {}
         with connection.cursor() as cursor:
             try:
-                cursor.execute(
-                    "SELECT ktp, nama, role from person where ktp = %s AND email = %s", [ktp, email])
-                person = cursor.fetchone()
                 token = requests.post(
                     ConnectDB.BASE_URL + '/auth/', {'username': ktp, 'password': email}).json()
+                print(token)
                 request.session['token'] = token['token']
                 taken = True
             except:
