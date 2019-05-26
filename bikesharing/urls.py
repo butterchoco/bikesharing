@@ -34,6 +34,8 @@ urlpatterns = [
     path('report/', include('report.urls', namespace='report')),
     path('acara/', include('acara.urls', namespace='acara')),
     path('penugasan/', include('penugasan.urls', namespace='penugasan')),
+    path('voucher/', include('voucher.urls', namespace='voucher')),
+    path('peminjaman/', include('peminjaman.urls', namespace='peminjaman')),
 ]
 
 if settings.DEBUG:
