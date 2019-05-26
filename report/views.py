@@ -30,6 +30,7 @@ def report_view(request):
         ConnectDB.BASE_URL + '/report/api/', headers=headers).json()
     dataPerson = requests.get(
         ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
+    response.update(dataPerson[0])
     response['laporan'] = []
     for data in dataLaporan:
         response['laporan'].append(data)
