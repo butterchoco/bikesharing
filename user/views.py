@@ -72,13 +72,20 @@ def login(request):
         ktp = request.POST.get('ktp', False)
         email = request.POST.get('email', False)
         data = {}
-        token = requests.post(
-            ConnectDB.BASE_URL + '/auth/', {'username': ktp, 'password': email}).json()
-        if ('token' in token.keys()):
-            request.session['token'] = token['token']
-            taken = True
-        data['is_taken'] = taken
-        return JsonResponse(data)
+        with connection.cursor() as cursor:
+            try:
+                cursor.execute(
+                    "SELECT ktp, nama, email, role from person where ktp = %s AND email = %s", [ktp, email])
+                person = ConnectDB.dictfetchall(cursor)[0]
+                token = requests.post(
+                    ConnectDB.BASE_URL + '/auth/', {'username': person['ktp'], 'password': person['email']}).json()
+                request.session['token'] = token['token']
+                taken = True
+            except:
+                taken = False
+            finally:
+                data['is_taken'] = taken
+                return JsonResponse(data)
     else:
         return HttpResponse("HTTP 204")
 
