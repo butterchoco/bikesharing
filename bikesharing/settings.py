@@ -57,7 +57,9 @@ INSTALLED_APPS = [
     'transaction',
     'report',
     'acara',
-    'penugasan'
+    'penugasan',
+    'voucher',
+    'peminjaman',
 ]
 
 REST_FRAMEWORK = {
