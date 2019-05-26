@@ -68,21 +68,17 @@ def signUp(request):
 
 def login(request):
     if (request.method == "POST"):
+        taken = False
         ktp = request.POST.get('ktp', False)
         email = request.POST.get('email', False)
         data = {}
-        with connection.cursor() as cursor:
-            try:
-                token = requests.post(
-                    ConnectDB.BASE_URL + '/auth/', {'username': ktp, 'password': email}).json()
-                print(token)
-                request.session['token'] = token['token']
-                taken = True
-            except:
-                taken = False
-            finally:
-                data['is_taken'] = taken
-                return JsonResponse(data)
+        token = requests.post(
+            ConnectDB.BASE_URL + '/auth/', {'username': ktp, 'password': email}).json()
+        if ('token' in token.keys()):
+            request.session['token'] = token['token']
+            taken = True
+        data['is_taken'] = taken
+        return JsonResponse(data)
     else:
         return HttpResponse("HTTP 204")
 
