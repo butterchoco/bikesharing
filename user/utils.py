@@ -1,8 +1,8 @@
-import os
+from bikesharing.utils.decouple import config
 
 
 class ConnectDB:
-    PRODUCTION = os.environ.get('CI_COMMIT_TAG')
+    PRODUCTION = config('PRODUCTION') == 'ON'
     if (PRODUCTION):
         BASE_URL = 'http://c6-basdat-bikesharing.herokuapp.com'
     else:
