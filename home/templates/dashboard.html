@@ -41,6 +41,7 @@
       </div>
     </div>
   </div>
+  {% if role == "ADMIN" or role == "PETUGAS" %}
   <div class="col grid">
     <div class="card">
       <h1 id="title">Report</h1>
@@ -49,6 +50,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
   <div class="col grid">
     <div class="card">
       <h1 id="title">Transaksi</h1>
