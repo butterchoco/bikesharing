@@ -1,3 +1,62 @@
-<div>
-    <h1>Voucher Page</h1>
-</div>
+{% load static %}
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body>
+<h1 style=" text-align: center; margin: 20px auto;">Vouchers</h1>
+
+<table class="table" style="">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nama</th>
+        <th scope="col">Kategori</th>
+        <th scope="col">Nilai Poin</th>
+        <th scope="col">Deskripsi</th>
+        <th scope="col">Klaim</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td scope="row">1</td>
+        <td>AVENGER</td>
+        <td>the last acara</td>
+        <td>15 Mei 2020</td>
+        <td>16 Mei 2020</td>
+        <td>Tidak</td>
+        <td>
+            <button type="submit" class="btn green m-1" id="button">Delete</button>
+            <button type="submit" class="btn green m-1" id="button">Update</button>
+        </td>
+    </tr>
+    <tr>
+        <td scope="row">2</td>
+        <td>ENEMY</td>
+        <td>the FIRST acara</td>
+        <td>12 Mei 2020</td>
+        <td>16 Mei 2020</td>
+        <td>Ya</td>
+        <td>
+            <button type="submit" class="btn green m-1" id="button">Delete</button>
+            <button type="submit" class="btn green m-1" id="button">Update</button>
+        </td>
+    </tr>
+    <tr>
+        <td scope="row">3</td>
+        <td>ANJUNGAN</td>
+        <td>the second acara</td>
+        <td>14 Mei 2020</td>
+        <td>16 Mei 2020</td>
+        <td>Tidak</td>
+        <td>
+            <button type="submit" class="btn green m-1" id="button">Delete</button>
+            <button type="submit" class="btn green m-1" id="button">Update</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>

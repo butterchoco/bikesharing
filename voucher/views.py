@@ -25,12 +25,12 @@ class VoucherAPI(APIView):
 
 def voucher_view(request):
     response = {}
-    headers = {'Authorization': 'Token ' + request.session['token']}
+    # headers = {'Authorization': 'Token ' + request.session['token']}
     dataVoucher = requests.get(
-        ConnectDB.BASE_URL + '/voucher/api/', headers=headers).json()
+        ConnectDB.BASE_URL + '/voucher/api/').json()
     dataPerson = requests.get(
-        ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
-    response.update(dataPerson[0])
+        ConnectDB.BASE_URL + '/user/api/').json()
+    # response.update(dataPerson[0])
     response['voucher'] = []
     for data in dataVoucher:
         response['voucher'].append(data)
