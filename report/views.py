@@ -17,10 +17,12 @@ class ReportAPI(APIView):
     def get(self, request):
         user = request.user
         with connection.cursor() as cursor:
-            if (user.email == "ANGGOTA"):
+            if (user.email == "ADMIN" or user.email == "PETUGAS"):
                 cursor.execute(
                     "SELECT l.* FROM anggota a, laporan l, person p WHERE p.ktp = a.ktp AND a.no_kartu = l.no_kartu_anggota AND p.ktp = %s", [user.username])
                 return Response(ConnectDB.dictfetchall(cursor))
+            else:
+                return Response([{}])
 
 
 def report_view(request):

@@ -98,7 +98,21 @@ def validate(request):
         with connection.cursor() as cursor:
             error = ""
             taken = False
-            if (ktp != ""):
+            if (ktp != "" and email != ""):
+                print("masuk1")
+                cursor.execute(
+                    "SELECT ktp, nama, role from person where ktp = %s", [ktp])
+                person = cursor.fetchone()
+                if (person is not None):
+                    error = "Ktp sudah terpakai"
+                    taken = True
+                cursor.execute(
+                    "SELECT ktp, nama, role from person where email = %s", [email])
+                person = cursor.fetchone()
+                if (person is not None):
+                    error = "Email sudah terpakai"
+                    taken = True
+            elif (ktp != ""):
                 cursor.execute(
                     "SELECT ktp, nama, role from person where ktp = %s", [ktp])
                 person = cursor.fetchone()
@@ -111,13 +125,6 @@ def validate(request):
                 person = cursor.fetchone()
                 if (person is not None):
                     error = "Email sudah terpakai"
-                    taken = True
-            else:
-                cursor.execute(
-                    "SELECT ktp, nama, role from person where ktp = %s OR email = %s", [ktp, email])
-                person = cursor.fetchone()
-                if (person is not None):
-                    error = "Ktp atau email sudah terpakai"
                     taken = True
             data = {
                 'is_taken': taken,

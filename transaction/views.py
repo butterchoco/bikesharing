@@ -22,6 +22,8 @@ class TransactionAPI(APIView):
                 cursor.execute(
                     "SELECT t.* FROM transaksi t, anggota a, person p WHERE p.ktp = a.ktp AND a.no_kartu = t.no_kartu_anggota AND p.ktp = %s", [user.username])
                 return Response(ConnectDB.dictfetchall(cursor))
+            else:
+                return Response([{}])
 
 
 def transaction_view(request):

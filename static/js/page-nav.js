@@ -55,3 +55,11 @@ avatar.onclick = function() {
 		profileBar.style.opacity = "0";
 	}
 };
+
+tooltipIn = function(b) {
+	b.children[0].children[0].style.display = 'block';
+}
+
+tooltipOut = function(b) {
+	b.children[0].children[0].style.display = 'none';
+}
