@@ -9,7 +9,7 @@
         </div>
         <div class="col grid flex-end">
           <p id="money-plus">{{ data.nominal }}</p>
-          <p id="date">{{ data.date_time }}</p>
+          <p id="date">{{ data.date_time|slice:":10" }}, {{ data.date_time|slice:"11:16" }}</p>
         </div>
       </div>
     </div>

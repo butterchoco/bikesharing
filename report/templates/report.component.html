@@ -9,7 +9,7 @@
           <p id="description">Nomor sepeda : {{ data.no_sepeda }} sedang di{{ data.status }}</p>
         </div>
         <div class="col grid flex-end">
-          <p id="date">{{ data.datetime_pinjam }}</p>
+          <p id="date">{{ data.datetime_pinjam|slice:":10" }}, {{ data.datetime_pinjam|slice:"11:16" }}</p>
         </div>
       </div>
     </div>
