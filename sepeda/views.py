@@ -9,6 +9,20 @@ def index(request):
 def sepeda_lists(request):
     return render(request, 'sepeda_lists.html')
 
+def sepeda_register(request):
+    if (request.method == "POST"):
+        merk = request.POST.get('merk', None)
+        jenis = request.POST.get('jenis', None)
+        status = request.POST.get('status', None)
+        stasiun = request.POST.get('stasiun', None)
+        penyumbang = request.POST.get('penyumbang', None)
+        with connection.cursor() as cursor:
+            cursor.execute("INSERT INTO public.sepeda VALUES(%s, %s, %s, %s, %s)", [
+                merk, jenis, status, stasiun, penyumbang])
+        return HttpResponse("SUCCESS 200")
+    else:
+        return HttpResponse("HTTP 204")
+
 # def register(request):
 #     if (request.method == "POST"):
 #         form = sepeda_forms(request.POST)

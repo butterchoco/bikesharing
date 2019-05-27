@@ -27,8 +27,14 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'c6-basdat-bikesharing.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
+                 'c6-basdat-bikesharing.herokuapp.com']
 
+CORS_ORIGIN_WHITELIST = (
+    'sharebike.netlify.com',
+    '127.0.0.1:4200',
+    'localhost:4200'
+)
 
 # Application definition
 
@@ -41,10 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'rest_framework',
+    'corsheaders',
     'home',
     'registrasi',
     'sepeda',
-    'stasiun'
+    'stasiun',
+    'transaction',
+    'report',
+    'acara',
+    'penugasan'
 ]
 
 REST_FRAMEWORK = {
@@ -65,6 +76,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'bikesharing.urls'
@@ -72,7 +85,7 @@ ROOT_URLCONF = 'bikesharing.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -146,6 +159,9 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 INTERNAL_IPS = ('127.0.0.1',)

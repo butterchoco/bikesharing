@@ -29,7 +29,12 @@ urlpatterns = [
     path('home/', include('home.urls', namespace='home')),
     path('registrasi/', include('registrasi.urls', namespace='registrasi')),
     path('sepeda/', include('sepeda.urls', namespace='sepeda')),
-    path('stasiun/', include('stasiun.urls', namespace='stasiun'))
+    path('stasiun/', include('stasiun.urls', namespace='stasiun')),
+    path('user/', include('registrasi.urls', namespace='registrasi')),
+    path('transaction/', include('transaction.urls', namespace='transaction')),
+    path('report/', include('report.urls', namespace='report')),
+    path('acara/', include('acara.urls', namespace='acara')),
+    path('penugasan/', include('penugasan.urls', namespace='penugasan')),
 ]
 
 if settings.DEBUG:
