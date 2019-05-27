@@ -113,7 +113,7 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
-DATABASES['default']['OPTION'] = {'option': '-c search_path=bikesharing'}
+DATABASES['default']['OPTIONS'] = {'options': '-c search_path=bikesharing'}
 TEST_DATABASES = {
     'default': dj_database_url.config(
         default=config('TEST_DATABASE_URL')
