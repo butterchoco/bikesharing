@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import index
+from .views import voucher_view, VoucherAPI
 app_name = 'voucher'
 urlpatterns = [
-    path('', index),
+    path('', voucher_view),
+    path('api/', VoucherAPI.as_view())
 ]
