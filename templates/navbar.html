@@ -10,9 +10,11 @@
   </div>
 </nav>
 
-{% if role == "ANGGOTA" %}
 <div id="profileBar" class="card">
-  <p id="account-number">No. <span id="no_kartu">{{ no_kartu }}</span></p>
-  <p id="saldo">{{ saldo }}</p>
+  {% if role == "ANGGOTA" %}
+    <p id="account-number">No. <span id="no_kartu">{{ no_kartu }}</span></p>
+    <p id="saldo">{{ saldo }}</p>
+  {% else %}
+    <p id="ktp">ktp {{ ktp }}</p>
+  {% endif %}
 </div>
-{% endif %}
