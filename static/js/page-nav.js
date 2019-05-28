@@ -26,7 +26,7 @@ function ripple(e) {
 	transitionEffect.style.top = e.clientY - this.offsetTop - d / 2 + "px";
 }
 
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("modal-transaction");
 
 var modalbtn = document.getElementsByClassName("modal-btn");
 
@@ -49,10 +49,17 @@ profileBar.style.opacity = "0";
 
 avatar.onclick = function() {
 	toggleProfile = toggleProfile ^ 1;
-	console.log(toggleProfile);
 	if (toggleProfile == 1) {
 		profileBar.style.opacity = "1";
 	} else {
 		profileBar.style.opacity = "0";
 	}
 };
+
+tooltipIn = function(b) {
+	b.children[0].children[0].style.display = 'block';
+}
+
+tooltipOut = function(b) {
+	b.children[0].children[0].style.display = 'none';
+}

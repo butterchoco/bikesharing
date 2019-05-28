@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import RedirectView
+from rest_framework.authtoken.views import obtain_auth_token
 from . import settings
 from .utils.routers import router
 
@@ -25,12 +26,12 @@ urlpatterns = [
     path('', RedirectView.as_view(url='home/')),
     path('admin/', admin.site.urls),
     path('router/', include(router.urls)),
+    path('auth/', obtain_auth_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('home/', include('home.urls', namespace='home')),
-    path('registrasi/', include('registrasi.urls', namespace='registrasi')),
     path('sepeda/', include('sepeda.urls', namespace='sepeda')),
     path('stasiun/', include('stasiun.urls', namespace='stasiun')),
-    path('user/', include('registrasi.urls', namespace='registrasi')),
+    path('user/', include('user.urls', namespace='registrasi')),
     path('transaction/', include('transaction.urls', namespace='transaction')),
     path('report/', include('report.urls', namespace='report')),
     path('acara/', include('acara.urls', namespace='acara')),

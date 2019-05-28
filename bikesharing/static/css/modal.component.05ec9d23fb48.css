@@ -1,0 +1,110 @@
+.modal-container {
+  width: 100vw;
+  height: 100vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1000;
+}
+
+.modal-container .modal {
+  position: absolute;
+  z-index: 1001;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  -webkit-animation: slide-up 0.6s ease;
+          animation: slide-up 0.6s ease;
+}
+
+.modal-container .modal .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.modal-container .modal .header .close {
+  height: 20px;
+  width: 20px;
+  padding: 0;
+  font-weight: 500;
+  font-style: normal;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+}
+
+.modal-container .modal .header .close:hover {
+  background: #eee;
+  border-radius: 10px;
+}
+
+.modal-container .modal .header .close:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+.modal-container .modal .content {
+  padding: 20px 10px;
+  text-overflow: ellipsis;
+  word-wrap: initial;
+}
+
+.modal-container .modal .footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+@-webkit-keyframes slide-up {
+  from {
+    -webkit-transform: translateY(40em);
+            transform: translateY(40em);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    -webkit-transform: translateY(40em);
+            transform: translateY(40em);
+    opacity: 0;
+  }
+  to {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
+}
+/*# sourceMappingURL=modal.component.css.map */

@@ -1,0 +1,23 @@
+{% if laporan|length > 0 %}
+{% for data in laporan %}
+<div class="card grey">
+  <div class="col flex-center ui styled fluid accordion">
+    <div class="col grid">
+      <div class="navbar">
+        <div class="col grid flex-start">
+          <h4 id="title">{{ data.id_laporan }}</h4>
+          <p id="description">Nomor sepeda : {{ data.no_sepeda }} sedang di{{ data.status }}</p>
+        </div>
+        <div class="col grid flex-end">
+          <p id="date">{{ data.datetime_pinjam|slice:":10" }}, {{ data.datetime_pinjam|slice:"11:16" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="flex-center">
+  <p>Tidak ada laporan.</p>
+</div>
+{% endif %}

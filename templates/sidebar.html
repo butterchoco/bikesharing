@@ -11,33 +11,56 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bikesharing</title>
   <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.js"></script>
 </head>
 
 <body>
   <section class="container">
+    <div id="loading-screen" class="sk-circle"></div>
     {% if ktp %}
     <div id="side">
-      <a href="/">
-        <div class="row flex-center"><i class="material-icons md-light">dashboard</i></div>
+      <a onmouseout='tooltipOut(this)' onmouseover='tooltipIn(this)' href="/">
+        <div class="row flex-center">
+          <span class="tooltip" id="dashboard">Dashboard</span>
+          <i class="material-icons md-light">dashboard</i>
+          </div>
+      </a>
+      <a onmouseout='tooltipOut(this)' onmouseover='tooltipIn(this)' href="/">
+        <div class="row flex-center">
+          <span class="tooltip" id="stasiun">Stasiun</span>
+          <i class="material-icons md-light">commute</i>
+          </div>
+      </a>
+      <a onmouseout='tooltipOut(this)' onmouseover='tooltipIn(this)' href="/">
+        <div class="row flex-center">
+          <span class="tooltip" id="sepeda">Sepeda</span>
+          <i class="material-icons md-light">motorcycle</i>
+          </div>
       </a>
       {% if role == "ANGGOTA" %}
-      <a href="/">
-        <div class="row flex-center"><i class="material-icons md-light">commute</i></div>
-      </a>
-      <a href="/">
-        <div class="row flex-center"><i class="material-icons md-light">motorcycle</i></div>
+      <a onmouseout='tooltipOut(this)' onmouseover='tooltipIn(this)' href="/transaction">
+        <div class="row flex-center">
+          <span class="tooltip" id="transaksi">Transaksi</span>
+          <i class="material-icons md-light">compare_arrows</i>
+          </div>
       </a>
       {% endif %}
-      <a href="/transaction">
-        <div class="row flex-center"><i class="material-icons md-light">compare_arrows</i></div>
-      </a>
-      <a href="/report">
-        <div class="row flex-center"><i class="material-icons md-light">assignment</i></div>
-      </a>
-      {% if role == "PETUGAS" %}
+      {% if role == "ADMIN" or role == "ADMIN" %}
+        {% if role == "ADMIN" %}
+        {% endif %}
+        <a onmouseout='tooltipOut(this)' onmouseover='tooltipIn(this)' href="/report">
+          <div class="row flex-center">
+            <span class="tooltip" id="laporan">Laporan</span>
+            <i class="material-icons md-light">assignment</i>
+            </div>
+        </a>
       {% endif %}
-      <a href="/user/logout">
-        <div class="row flex-center"><i class="material-icons md-light">power_settings_new</i></div>
+      <a onmouseout='tooltipOut(this)' onmouseover='tooltipIn(this)' href="/user/logout">
+        <div class="row flex-center">
+          <span class="tooltip" id="logout">Logout</span>
+          <i class="material-icons md-light">power_settings_new</i>
+          </div>
       </a>
     </div>
 

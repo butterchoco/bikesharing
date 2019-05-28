@@ -30,11 +30,14 @@ DEBUG = True
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost',
                  'c6-basdat-bikesharing.herokuapp.com']
 
-CORS_ORIGIN_WHITELIST = (
-    'sharebike.netlify.com',
-    '127.0.0.1:4200',
-    'localhost:4200'
-)
+CORS_ORIGIN_WHITELIST = [
+    'http://sharebike.netlify.com',
+    'http://127.0.0.1:4200',
+    'http://localhost:4200',
+    'http://c6-basdat-bikesharing.herokuapp.com'
+]
+
+SESSION_COOKIE_HTTPONLY = True
 
 # Application definition
 
@@ -47,11 +50,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'home',
     'registrasi',
     'sepeda',
     'stasiun',
+    'user',
     'transaction',
     'report',
     'acara',
@@ -63,7 +68,7 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
-    ]
+    ],
 }
 
 MIDDLEWARE = [
@@ -111,6 +116,7 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
+DATABASES['default']['OPTIONS'] = {'options': '-c search_path=bikesharing'}
 TEST_DATABASES = {
     'default': dj_database_url.config(
         default=config('TEST_DATABASE_URL')

@@ -4,27 +4,36 @@
 
 {% block content %}
 <div class="row">
-  <div class="col grid flex-center">
+  <div class="col grid">
     <div class="card">
       <div class="col grid">
         <h1 id="title">Profile</h1>
         <div class="row">
-          <div class="col grid">
+          <div class="col grid flex-center">
             <img id="profile" src="{% static 'img/profile.png' %}" alt="profile-pic" class="img clip">
+            <h3>{{ role }}</h3>
           </div>
           <div id="profile-description" class="col grid">
             <ul>
               <li>
-                <p>KTP : {{ ktp }}</p>
+                <h4>KTP :</h4>
+                <p>{{ ktp }}</p>
               </li>
               <li>
-                <p>Nama : {{ nama }}</p>
+                <h4>Nama : </h4>
+                <p>{{ nama }}</p>
               </li>
               <li>
-                <p>Saldo : {{ saldo }}</p>
+                <h4>Email : </h4>
+                <p>{{ email }}</p>
               </li>
               <li>
-                <p> Points : {{ poin }}</p>
+                <h4>Alamat : </h4>
+                <p>{{ alamat }}</p>
+              </li>
+              <li>
+                <h4>No_telp : </h4>
+                <p> {{ no_telp }}</p>
               </li>
             </ul>
           </div>
@@ -32,27 +41,25 @@
       </div>
     </div>
   </div>
+  {% if role == "ADMIN" or role == "PETUGAS" %}
+  <div class="col grid">
+    <div class="card">
+      <h1 id="title">Report</h1>
+      <div class="overscroll">
+        {% include 'report.component.html' %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if role == "ANGGOTA" %}
   <div class="col grid">
     <div class="card">
       <h1 id="title">Transaksi</h1>
       <div class="overscroll">
-        <div class="card grey">
-          <div class="col flex-center ui styled fluid accordion">
-            <div id="title" class="col grid title">
-              <div class="navbar">
-                <div class="col grid flex-start">
-                  <h3 id="title">Jenis</h3>
-                </div>
-                <div class="col grid flex-end">
-                  <p id="money-plus">10000</p>
-                  <p id="date">2019-04-03</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {% include 'transaction.component.html' %}
       </div>
     </div>
   </div>
+  {% endif %}
 </div>
 {% endblock %}
