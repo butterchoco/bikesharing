@@ -170,4 +170,3 @@ STATICFILES_DIRS = (
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 INTERNAL_IPS = ('127.0.0.1',)
->>>>>>> 11dfc4b2b355a6a37c4ba547ba942ffe18557ca4
