@@ -45,15 +45,15 @@
                         <i class="material-icons md-light">compare_arrows</i>
                     </div>
                 </a>
-            {% else %}
-                {% if role == "ADMIN" %}
-                {% endif %}
                 <a onmouseout='tooltipOut(this)' onmouseover='tooltipIn(this)' href="/penugasan">
                     <div class="row flex-center">
                         <span class="tooltip" id="penugasan">Penugasan</span>
                         <i class="material-icons md-light">work</i>
                     </div>
                 </a>
+            {% else %}
+                {% if role == "ADMIN" %}
+                {% endif %}
                 <a onmouseout='tooltipOut(this)' onmouseover='tooltipIn(this)' href="/report">
                     <div class="row flex-center">
                         <span class="tooltip" id="laporan">Laporan</span>
