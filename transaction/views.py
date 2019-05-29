@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from rest_framework.views import APIView
@@ -17,27 +17,27 @@ class TransactionAPI(APIView):
 
     def get(self, request):
         user = request.user
-        with connection.cursor() as cursor:
-            if (user.email == "ANGGOTA"):
-                cursor.execute(
-                    "SELECT t.* FROM transaksi t, anggota a, person p WHERE p.ktp = a.ktp AND a.no_kartu = t.no_kartu_anggota AND p.ktp = %s", [user.username])
-                return Response(ConnectDB.dictfetchall(cursor))
-            else:
-                return Response([{}])
+        if (user.email == "ANGGOTA"):
+            data = ConnectDB.getDataWithQuery(
+                '''
+                SELECT t.* FROM transaksi t, anggota a, person p
+                WHERE p.ktp = a.ktp AND a.no_kartu = t.no_kartu_anggota AND
+                p.ktp = %s
+                ''', [user.username]
+            )
+            return Response(data)
+        else:
+            return Response([{}])
 
 
 def transaction_view(request):
-    response = {}
-    headers = {'Authorization': 'Token ' + request.session['token']}
-    dataTransaksi = requests.get(
-        ConnectDB.BASE_URL + '/transaction/api/', headers=headers).json()
-    dataPerson = requests.get(
-        ConnectDB.BASE_URL + '/user/api/', headers=headers).json()
-    response.update(dataPerson[0])
-    response['transaksi'] = []
-    for data in dataTransaksi:
-        response['transaksi'].append(data)
-    return render(request, 'transaction.html', response)
+    person = ConnectDB.getUserDataWithApi(request)
+    if (person['role'] != "ANGGOTA"):
+        return redirect('/')
+    else:
+        response = ConnectDB.getPersonalDataWithApi(request, 'transaksi', '/transaction/api/')
+        response.update(person)
+        return render(request, 'transaction.html', response)
 
 
 def add_transaction(request):
@@ -47,8 +47,10 @@ def add_transaction(request):
         jenis = request.POST.get('jenis', None)
         nominal = request.POST.get('nominal', None)
         with connection.cursor() as cursor:
-            cursor.execute("INSERT INTO transaksi VALUES(%s, %s, %s, %s)", [
-                no_kartu, date, jenis, nominal])
+            cursor.execute(
+                '''
+                INSERT INTO transaksi VALUES(%s, %s, %s, %s)
+                ''', [no_kartu, date, jenis, nominal])
         return HttpResponse("SUCCESS 200")
     else:
         return HttpResponse("HTTP 204")

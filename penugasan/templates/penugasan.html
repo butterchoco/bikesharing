@@ -1,34 +1,35 @@
 {% extends 'sidebar.html' %}
 {% load static %}
-{% load staticfiles %}
+{% load staticfiles%}
 
 {% block content %}
 
-<h1 style=" text-align: center;"> Pendaftaran Penugasan</h1>
-
-<section id="page1">
-    <div id="ripplePlaceholder"></div>
-    <div class="row grid flex-center">
-        <div class="col grid-4"></div>
-        <div class="col grid-3 flex-center">
-            <img id="logo" class="img-fluid" alt="Bootstrap Image Preview" src="{% static 'img/animated-book.gif' %}" />
-        </div>
-        <div class="col grid-3">
-            <div class="card">
-                <form id="signup" method="POST" role="form">
-                    {% csrf_token %}
-                    {{ form }}
-                    <button id="submit_form" type="submit" class="btn green m-1">Enroll</button>
-                </form>
-                <form role="form" id="signin" hidden>
-                    <button type="submit" class="btn green m-1">Enroll</button>
-                </form>
-
-            </div>
-        </div>
-        <button type="submit" class="block btn green m-1" style="border-radius: 70%">View Table</button>
-        <div class="col grid-4"></div>
+<div class="row">
+  <div class="col grid">
+    <div id="riwayat-transaksi" class="card">
+      <h1 id="title">Penugasan</h1>
+      {% include 'penugasan.component.html' %}
     </div>
-</section>
+  </div>
+</div>
 
+{% if role == "ADMIN" %}
+<div id="modal-container" class="modal">
+  <div class="modal-content">
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group"><label for="id_nominal_topup">Nominal Top up</label><input type="number"
+          class="form-control" id="id_nominal_topup" placeholder="How much..." /></div>
+    </form>
+    <button id="submit" class="btn green m-1">Add</button>
+  </div>
+
+</div>
+
+<div class=" circle ripple modal-btn" data-target="modal-container" data-color="white" id="add-btn">
+  <i id="add" class="material-icons md-light">add</i>
+</div>
+{% endif %}
+
+<script src="{% static 'js/penugasan.js' %}"></script>
 {% endblock %}
