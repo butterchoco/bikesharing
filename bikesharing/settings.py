@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'home',
-    'registrasi',
     'sepeda',
     'stasiun',
     'user',
