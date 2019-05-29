@@ -99,7 +99,6 @@ def validate(request):
             error = ""
             taken = False
             if (ktp != "" and email != ""):
-                print("masuk1")
                 cursor.execute(
                     "SELECT ktp, nama, role from person where ktp = %s", [ktp])
                 person = cursor.fetchone()
