@@ -43,12 +43,12 @@ def voucher_add(request):
         kategori = request.POST.get('kategori', None)
         nilai_poin = request.POST.get('nilai_poin', None)
         deskripsi = request.POST.get('deskripsi', None)
-        no_kartu_anggota = request.POST.get('no_kartu_anggota', None)
+        # no_kartu_anggota = request.POST.get('no_kartu_anggota', None)
         with connection.cursor() as cursor:
             cursor.execute(
                 '''
-                INSERT INTO voucher VALUES(%s, %s, %s, %s, %s, %s)
-                ''', [id_voucher, nama, kategori, nilai_poin, deskripsi, no_kartu_anggota])
+                INSERT INTO voucher VALUES(%s, %s, %s, %s, %s)
+                ''', [id_voucher, nama, kategori, nilai_poin, deskripsi])
         return HttpResponse("SUCCESS 200")
     else:
         return HttpResponse("HTTP 204")
