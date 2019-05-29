@@ -1,0 +1,78 @@
+
+      {% if sepeda|length > 0 %}
+        <table class="table" style="margin: 10 10 10 auto;">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Type</th>
+              <th scope="col">Station</th>
+              <th scope="col">Status</th>
+              <th scope="col">Donor</th>
+
+              {% if role == "ADMIN" %}
+              <th scope="col">Action</th>
+              {% endif %}
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in sepeda %}
+            <tr>
+              <td>{{ data.nomor }}</td>
+              <td>{{ data.merk }}</td>
+              <td>{{ data.jenis }}</td>
+              <td>{{ data.id_stasiun}}</td>
+              {% if data.status == "True" %}
+              <td>Tersedia</td>
+              {% else %}
+              <td>Tidak Tersedia</td>
+              {% endif %}
+              <td>{{ data.no_kartu_penyumbang }}</td>
+              {% if role == "ADMIN" %}
+              <td class="col">
+                <button id={{ data.nomor }} class="btn red delete">Delete</button>
+                <button id={{ data.nomor }} class="btn orange update modal-update" data-target="modal-update">Update</button>
+              </td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% else %}
+        <div class="flex-center">
+          <p>Tidak ada sepeda.</p>
+        </div>
+        {% endif %}
+
+{% if role == "ADMIN" %}
+<div id="modal-update" class="modal">
+  <div class="modal-content">
+    <h3 id="nomor-update"></h3>
+    <form method="post">
+      {% csrf_token %}
+        <div class="form-group"><label for="id_brand_update">Brand</label><input type="text"
+        class="form-control" id="id_brand_update" placeholder="Enter the brand..." /></div>
+
+        <div class="form-group"><label for="id_type_update">Type</label><input type="text"
+        class="form-control" id="id_type_update" placeholder="Enter the type..." /></div>
+
+        <div class="form-group">
+            <label for="id_status_update">Status</label>
+            <select id="id_status_update" class="form-control" class="ui fluid dropdown">
+                <option hidden value="">Status</option>
+                <option value="Tersedia">Tersedia</option>
+                <option value="Tidak tersedia">Tidak tersedia</option>
+            </select>
+        </div>
+        <div class="form-group"><label for="id_station_update">Station</label><input type="text"
+            class="form-control" id="id_station_update" placeholder="Enter the Station..." /></div>
+            <div class="form-group"><label for="id_pendonor_update">Donor Card Number</label><input type="text"
+                class="form-control" id="id_pendonor_update" placeholder="Enter the Donor name..." /></div>
+        </form>
+        <button id="update-form" class="btn orange">Update</button>
+    </div>
+  </div>
+</div>
+{% endif %}

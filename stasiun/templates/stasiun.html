@@ -1,0 +1,43 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+{% load staticfiles%}
+
+{% block content %}
+
+<div class="row">
+  <div class="col grid">
+    <div id="riwayat-transaksi" class="card">
+      <h1 id="title">Stasiun</h1>
+      {% include 'stasiun.component.html' %}
+    </div>
+  </div>
+</div>
+
+{% if role == "ADMIN" %}
+<div id="modal-container" class="modal">
+  <div class="modal-content">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group"><label for="id_stasiun">Station Name</label><input type="text"
+        class="form-control" id="id_stasiun" placeholder="Enter the name..." /></div>
+
+        <div class="form-group"><label for="id_address">Address</label><input type="text"
+        class="form-control" id="id_address" placeholder="Enter the address..." /></div>
+
+        <div class="form-group"><label for="id_latitude">Latitude</label><input type="number"
+        class="form-control" id="id_latitude" placeholder="Enter the latitude..." /></div>
+
+        <div class="form-group"><label for="id_longitude">Longitude</label><input type="number"
+        class="form-control" id="id_longitude" placeholder="Enter the Longitude..." /></div>
+      </form>
+      <button id="submit" class="btn green m-1">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class=" circle ripple modal-btn" data-target="modal-container" data-color="white" id="add-btn">
+  <i id="add" class="material-icons md-light">add</i>
+</div>
+{% endif %}
+  <script src="{% static 'js/stasiun.js' %}"></script>
+{% endblock %}

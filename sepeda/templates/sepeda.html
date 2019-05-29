@@ -1,0 +1,51 @@
+ {% extends 'sidebar.html' %}
+{% load static %}
+{% load staticfiles%}
+
+{% block content %}
+
+<div class="row">
+  <div class="col grid">
+    <div id="riwayat-transaksi" class="card">
+      <h1 id="title">Sepeda</h1>
+      {% include 'sepeda.component.html' %}
+    </div>
+  </div>
+</div>
+
+{% if role == "ADMIN" %}
+<div id="modal-container" class="modal">
+  <div class="modal-content">
+    <form method="post">
+      {% csrf_token %}
+        <div class="form-group"><label for="id_brand">Brand</label><input type="text"
+        class="form-control" id="id_brand" placeholder="Enter the brand..." /></div>
+
+        <div class="form-group"><label for="id_type">Type</label><input type="text"
+        class="form-control" id="id_type" placeholder="Enter the type..." /></div>
+
+        <div class="form-group">
+            <label for="id_status">Status</label>
+            <select id="id_status" class="form-control" class="ui fluid dropdown">
+                <option hidden value="">Status</option>
+                <option value="Tersedia">Tersedia</option>
+                <option value="Tidak tersedia">Tidak tersedia</option>
+            </select>
+        </div>
+        <div class="form-group"><label for="id_station">Station</label><input type="text"
+            class="form-control" id="id_station" placeholder="Enter the Station..." /></div>
+            
+            <div class="form-group"><label for="id_pendonor">Donor Card Number</label><input type="text"
+                class="form-control" id="id_pendonor" placeholder="Enter the Donor name..." /></div>
+        </form>
+        <button id="submit" class="btn green m-1">Add</button>
+    </div>
+  </div>
+</div>
+
+<div class=" circle ripple modal-btn" data-target="modal-container" data-color="white" id="add-btn">
+  <i id="add" class="material-icons md-light">add</i>
+</div>
+{% endif %}
+  <script src="{% static 'js/sepeda.js' %}"></script>
+{% endblock %}

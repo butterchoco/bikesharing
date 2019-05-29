@@ -29,6 +29,8 @@ urlpatterns = [
     path('auth/', obtain_auth_token),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('home/', include('home.urls', namespace='home')),
+    path('sepeda/', include('sepeda.urls', namespace='sepeda')),
+    path('stasiun/', include('stasiun.urls', namespace='stasiun')),
     path('user/', include('user.urls', namespace='registrasi')),
     path('transaction/', include('transaction.urls', namespace='transaction')),
     path('report/', include('report.urls', namespace='report')),
