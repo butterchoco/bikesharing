@@ -1,23 +1,42 @@
 {% if voucher|length > 0 %}
-{% for data in voucher %}
-<div class="card grey">
-  <div class="col flex-center ui styled fluid accordion">
-    <div class="col grid">
-      <div class="navbar">
-        <div class="col grid flex-start">
-          <h4 id="title">{{ data.id_voucher }}</h4>
-          <p id="description">Nama Voucher : {{ data.nama }} Kategori {{ data.kategori }}</p>
-        </div>
-        <div class="col grid flex-end">
-          <p id="date">{{ data.nilai_poin }}, {{ data.deskripsi }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endfor %}
+    <table class="table" style="margin: 10 10 10 auto;">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Poin</th>
+            <th scope="col">Deskripsi</th>
+            <th scope="col">No Kartu</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for data in voucher %}
+            <tr>
+                <td scope="row">{{ data.id_voucher }}</td>
+                <td>{{ data.nama }}</td>
+                <td>{{ data.kategori }}</td>
+                <td>{{ data.nilai_poin }}</td>
+                <td>{{ data.deskripsi }}</td>
+                <td>{{ data.no_kartu_anggota }}</td>
+                <td>
+                    {% if role == 'ADMIN' %}
+                    <button type="submit" class="btn green m-1" id="button">Delete</button>
+                    <button type="submit" class="btn green m-1" id="button">Update</button>
+                    {% else %}
+                    <button type="submit" class="btn green m-1" id="button">Claim</button>
+                    {% endif %}
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% else %}
-<div class="flex-center">
-  <p>Tidak ada Voucher.</p>
-</div>
+    <div class="flex-center">
+        <p>Tidak ada Voucher.</p>
+    </div>
 {% endif %}
