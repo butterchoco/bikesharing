@@ -74,7 +74,6 @@ ul li {
 }
 
 /*------------- Component -------------*/
-
 .modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
@@ -89,13 +88,13 @@ ul li {
 	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-/* Modal Content */
 .modal-content {
 	background-color: #fefefe;
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #888;
 	width: 80%;
+	animation: slideUp .5s ease;
 }
 
 /* The Close Button */
@@ -186,8 +185,8 @@ ul li {
 	overflow: hidden;
 }
 
-.alert-msg {
-	width: 20em;
+#alert-msg {
+	width: auto;
 	height: auto;
 	background-color: rgb(255, 64, 64);
 	color: rgb(255, 255, 255);
@@ -298,6 +297,21 @@ input {
 
 .overscroll::-webkit-scrollbar {
 	width: 0 !important;
+}
+
+.tooltip {
+	display: none;
+	position: absolute;
+	left: 0;
+	z-index: 1;
+	background-color: #222;
+	color: #eee;
+	border-radius: 2px;
+	font-weight: 700;
+	font-size: 14px;
+	padding: 5px;
+	margin-left: 50px;
+	animation: slideUp .5s ease;
 }
 
 /*-------------- Spacing -------------*/
@@ -525,7 +539,7 @@ tr {
 	width: 4em;
 	border: 0;
 	background-color: #00a8b5;
-	position: fixed;
+	position: absolute;
 	left: 0;
 }
 
@@ -569,14 +583,15 @@ tr {
 	padding: 10px;
 }
 
-#add-transaction {
+#add-btn {
 	position: fixed;
 	right: 5%;
 	bottom: 5%;
 }
 
-#saldo {
-	font-weight: 500;
+p#saldo {
+	font-weight: bold;
+	font-size: 14px;
 }
 
 #saldo::before {
@@ -632,6 +647,13 @@ tr {
 	height: 50px;
 	width: 50px;
 }
+
+p#account-number {
+	color: #aaa;
+	font-weight: light;
+	font-size: 12px;
+}
+
 
 /*----------- Animation ----------*/
 .sk-circle {
@@ -783,12 +805,19 @@ tr {
 	}
 }
 
+.slide-up {
+	transition: all 1s;
+	animation: slideUp 1s ease;
+}
+
 @keyframes slideUp {
 	from {
 		transform: translateY(100%);
+		opacity: 0;
 	}
 	to {
 		transform: translateY(0%);
+		opacity: 1;
 	}
 }
 

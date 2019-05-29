@@ -26,22 +26,6 @@ function ripple(e) {
 	transitionEffect.style.top = e.clientY - this.offsetTop - d / 2 + "px";
 }
 
-var modal = document.getElementById("modal-transaction");
-
-var modalbtn = document.getElementsByClassName("modal-btn");
-
-Array.prototype.forEach.call(modalbtn, function(b) {
-	b.addEventListener("click", function() {
-		modal.style.display = "block";
-	});
-});
-
-window.onclick = function(event) {
-	if (event.target == modal) {
-		modal.style.display = "none";
-	}
-};
-
 var toggleProfile = 0;
 const avatar = document.getElementById("avatar");
 const profileBar = document.getElementById("profileBar");
@@ -63,3 +47,19 @@ tooltipIn = function(b) {
 tooltipOut = function(b) {
 	b.children[0].children[0].style.display = 'none';
 }
+
+var modalbtn = document.getElementsByClassName("modal-btn");
+var modal = "";
+
+Array.prototype.forEach.call(modalbtn, function (b) {
+	b.addEventListener("click", function() {
+		modal = document.getElementById(this.dataset.target);
+		modal.style.display = "block";
+	});
+});
+
+window.onclick = function(event) {
+	if (event.target == modal) {
+		modal.style.display = "none";
+	}
+};

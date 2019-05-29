@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import penugasan_view, update_penugasan_view, show_penugasan_table_view
+from .views import penugasan_view, update_penugasan_view, PenugasanAPI, add_penugasan
 
 app_name = 'penugasan'
 urlpatterns = [
     path('', penugasan_view),
-    path('update', update_penugasan_view),
-    path('table', show_penugasan_table_view)
+    path('api/', PenugasanAPI.as_view()),
+    path('add/', add_penugasan),
+    path('update/', update_penugasan_view),
 ]

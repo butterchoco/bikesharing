@@ -1,0 +1,45 @@
+
+      {% if sepeda|length > 0 %}
+        <table class="table" style="margin: 10 10 10 auto;">
+          <thead>
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">Brand</th>
+              <th scope="col">Type</th>
+              <th scope="col">Station</th>
+              <th scope="col">Status</th>
+              <th scope="col">Donor</th>
+
+              {% if role == "ADMIN" %}
+              <th scope="col">Action</th>
+              {% endif %}
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for data in sepeda %}
+            <tr>
+              <td>{{ data.nomor }}</td>
+              <td>{{ data.merk }}</td>
+              <td>{{ data.jenis }}</td>
+              <td>{{ data.id_stasiun}}</td>
+              {% if data.status == "True" %}
+              <td>Tersedia</td>
+              {% else %}
+              <td>Tidak Tersedia</td>
+              {% endif %}
+              <td>{{ data.no_kartu_penyumbang }}</td>
+              {% if role == "ADMIN" %}
+              <td><button type="submit" class="btn green m-1" id="button" style="background-color:#de4383 !important">Delete</button>
+                <button type="submit" class="btn green m-1" id="button" style="background-color: #f3ae4b !important">Update</button></td>
+              {% endif %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        {% else %}
+        <div class="flex-center">
+          <p>Tidak ada sepeda.</p>
+        </div>
+        {% endif %}
