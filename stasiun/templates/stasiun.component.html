@@ -23,8 +23,10 @@
         <td>{{ data.lat }}</td>
         <td>{{ data.long }}</td>
         {% if role == "ADMIN" %}
-        <td><button type="submit" class="btn green m-1" id="button" style="background-color:#de4383 !important">Delete</button>
-        <button type="submit" class="btn green m-1" id="button" style="background-color: #f3ae4b !important">Update</button></td>
+        <td class="col">
+            <button class="btn red">Delete</button>
+            <button class="btn orange">Update</button>
+        </td>
         {% endif %}
     </tr>
     {% endfor %}

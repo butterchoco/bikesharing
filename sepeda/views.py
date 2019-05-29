@@ -52,3 +52,30 @@ def add_sepeda(request):
         return HttpResponse("SUCCESS 200")
     else:
         return HttpResponse("HTTP 204")
+
+def delete_sepeda(request):
+    if (request.method == "POST"):
+        nomor = request.POST.get('number', None)
+        with connection.cursor() as cursor:
+            cursor.execute("DELETE from sepeda WHERE nomor=%s", [nomor])
+        return HttpResponse("SUCCESS 200")
+    else:
+        return HttpResponse("HTTP 204")
+
+def update_sepeda(request):
+    if (request.method == "POST"):
+        nomor = request.POST.get('number', None)
+        merk = request.POST.get('brand', None)
+        jenis = request.POST.get('type', None)
+        status = request.POST.get('status', None)
+        stasiun = request.POST.get('station', None)
+        penyumbang = request.POST.get('pendonor', None)
+        with connection.cursor() as cursor:
+            cursor.execute('''
+            UPDATE sepeda 
+            SET merk=%s, jenis=%s, status=%s, id_stasiun=%s, no_kartu_penyumbang=%s
+            WHERE nomor=%s
+            ''', [merk, jenis, status, stasiun, penyumbang, nomor])
+        return HttpResponse("SUCCESS 200")
+    else:
+        return HttpResponse("HTTP 204")
