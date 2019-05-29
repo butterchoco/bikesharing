@@ -18,7 +18,7 @@ class PeminjamanAPI(APIView):
 
     def get(self, request):
         user = request.user
-        if user.email == 'ADMIN' or user.email == 'PETUGAS' or user.email == 'ANGGOTA':
+        if user.email == 'ANGGOTA':
             data = ConnectDB.getDataWithQuery(
                 '''
                 SELECT m.*
