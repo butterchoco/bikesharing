@@ -1,0 +1,23 @@
+{% if voucher|length > 0 %}
+{% for data in voucher %}
+<div class="card grey">
+  <div class="col flex-center ui styled fluid accordion">
+    <div class="col grid">
+      <div class="navbar">
+        <div class="col grid flex-start">
+          <h4 id="title">{{ data.id_voucher }}</h4>
+          <p id="description">Nama Voucher : {{ data.nama }} Kategori {{ data.kategori }}</p>
+        </div>
+        <div class="col grid flex-end">
+          <p id="date">{{ data.nilai_poin }}, {{ data.deskripsi }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="flex-center">
+  <p>Tidak ada Voucher.</p>
+</div>
+{% endif %}

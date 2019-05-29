@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from django.db import connection
 # from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from rest_framework.views import APIView
@@ -17,21 +18,37 @@ class VoucherAPI(APIView):
 
     def get(self, request):
         user = request.user
-        with connection.cursor() as cursor:
-            cursor.execute(
-                "SELECT v.* FROM voucher v, person p WHERE p.ktp = %s", [user.username])
-            return Response(ConnectDB.dictfetchall(cursor))
+        if (user.email == 'ADMIN' or user.email == 'PETUGAS' or user.email == 'ANGGOTA'):
+            data = ConnectDB.getDataWithQuery(
+                '''
+                SELECT v.*
+                FROM anggota a, voucher v, person p
+                WHERE p.ktp = a.ktp AND a.no_kartu = v.no_kartu_anggota AND p.ktp = %s
+                ''', [user.username])
+            return Response(data)
+        else:
+            return Response([{}])
 
 
 def voucher_view(request):
-    response = {}
-    # headers = {'Authorization': 'Token ' + request.session['token']}
-    dataVoucher = requests.get(
-        ConnectDB.BASE_URL + '/voucher/api/').json()
-    dataPerson = requests.get(
-        ConnectDB.BASE_URL + '/user/api/').json()
-    # response.update(dataPerson[0])
-    response['voucher'] = []
-    for data in dataVoucher:
-        response['voucher'].append(data)
+    person = ConnectDB.getUserDataWithApi(request)
+    response = ConnectDB.getPersonalDataWithApi(request, 'voucher', '/voucher/api/')
+    response.update(person)
     return render(request, 'voucher_view.html', response)
+
+def voucher_add(request):
+    if (request.method == "POST"):
+        id_voucher = request.POST.get('id_voucher', None)
+        nama = request.POST.get('nama', None)
+        kategori = request.POST.get('kategori', None)
+        nilai_poin = request.POST.get('nilai_poin', None)
+        deskripsi = request.POST.get('deskripsi', None)
+        no_kartu_anggota = request.POST.get('no_kartu_anggota', None)
+        with connection.cursor() as cursor:
+            cursor.execute(
+                '''
+                INSERT INTO voucher VALUES(%s, %s, %s, %s, %s, %s)
+                ''', [id_voucher, nama, kategori, nilai_poin, deskripsi, no_kartu_anggota])
+        return HttpResponse("SUCCESS 200")
+    else:
+        return HttpResponse("HTTP 204")
