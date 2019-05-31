@@ -1,0 +1,41 @@
+{% if stasiun|length > 0 %}
+<table class="table" style="margin: 10 10 10 auto;">
+    <thead>
+    <tr>
+        <th scope="col">No</th>
+        <th scope="col">Station Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Latitude</th>
+        <th scope="col">Longitude</th>
+
+        {% if role == "ADMIN" %}
+        <th scope="col">Action</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for data in stasiun %}
+    <tr>
+        <td>{{ data.id_stasiun }}</td>
+        <td>{{ data.nama }}</td>
+        <td>{{ data.alamat }}</td>
+        <td>{{ data.lat }}</td>
+        <td>{{ data.long }}</td>
+        {% if role == "ADMIN" %}
+        <td class="col">
+            <button class="btn red">Delete</button>
+            <button class="btn orange">Update</button>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% else %}
+<div class="flex-center">
+<p>Tidak ada stasiun.</p>
+</div>
+{% endif %}

@@ -55,20 +55,3 @@ $("#submit").on("click", function() {
 		alert("You must specified correct value. Minus value is not allowed!");
 	}
 });
-
-
-var modalbtn = document.getElementsByClassName("modal-btn");
-var modal = "";
-
-Array.prototype.forEach.call(modalbtn, function (b) {
-	b.addEventListener("click", function() {
-		modal = document.getElementById(this.dataset.target);
-		modal.style.display = "block";
-	});
-});
-
-window.onclick = function(event) {
-	if (event.target == modal) {
-		modal.style.display = "none";
-	}
-};

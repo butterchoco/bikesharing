@@ -47,3 +47,19 @@ tooltipIn = function(b) {
 tooltipOut = function(b) {
 	b.children[0].children[0].style.display = 'none';
 }
+
+var modalbtn = document.getElementsByClassName("modal-btn");
+var modal = "";
+
+Array.prototype.forEach.call(modalbtn, function (b) {
+	b.addEventListener("click", function() {
+		modal = document.getElementById(this.dataset.target);
+		modal.style.display = "block";
+	});
+});
+
+window.onclick = function(event) {
+	if (event.target == modal) {
+		modal.style.display = "none";
+	}
+};
