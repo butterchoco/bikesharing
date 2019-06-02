@@ -25,26 +25,28 @@ from .utils.routers import router
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('', RedirectView.as_view(url='home/')),
-    path('admin/', admin.site.urls),
-    path('router/', include(router.urls)),
-    path('auth/', obtain_auth_token),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('home/', include('home.urls', namespace='home')),
-    path('user/', include('user.urls', namespace='registrasi')),
-    path('transaction/', include('transaction.urls', namespace='transaction')),
-    path('report/', include('report.urls', namespace='report')),
-    path('acara/', include('acara.urls', namespace='acara')),
-    path('penugasan/', include('penugasan.urls', namespace='penugasan')),
-    path('voucher/', include('voucher.urls', namespace='voucher')),
-    path('peminjaman/', include('peminjaman.urls', namespace='peminjaman')),
+    path("", RedirectView.as_view(url="home/")),
+    path("admin/", admin.site.urls),
+    path("router/", include(router.urls)),
+    path("auth/", obtain_auth_token),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("home/", include("home.urls", namespace="home")),
+    path("user/", include("user.urls", namespace="registrasi")),
+    path("transaction/", include("transaction.urls", namespace="transaction")),
+    path("report/", include("report.urls", namespace="report")),
+    path("acara/", include("acara.urls", namespace="acara")),
+    path("penugasan/", include("penugasan.urls", namespace="penugasan")),
+    path("voucher/", include("voucher.urls", namespace="voucher")),
+    path("peminjaman/", include("peminjaman.urls", namespace="peminjaman")),
+    path("sepeda/", include("sepeda.urls", namespace="sepeda")),
+    path("stasiun/", include("stasiun.urls", namespace="stasiun")),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns = [
-        path('__debug__/', include(debug_toolbar.urls)),
 
+    urlpatterns = [
+        path("__debug__/", include(debug_toolbar.urls)),
         # For django versions before 2.0:
         # url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]
+    ] + urlpatterns
