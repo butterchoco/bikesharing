@@ -1,0 +1,42 @@
+{% if voucher|length > 0 %}
+    <table class="table" style="margin: 10 10 10 auto;">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Kategori</th>
+            <th scope="col">Poin</th>
+            <th scope="col">Deskripsi</th>
+            <th scope="col">No Kartu</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for data in voucher %}
+            <tr>
+                <td scope="row">{{ data.id_voucher }}</td>
+                <td>{{ data.nama }}</td>
+                <td>{{ data.kategori }}</td>
+                <td>{{ data.nilai_poin }}</td>
+                <td>{{ data.deskripsi }}</td>
+                <td>{{ data.no_kartu_anggota }}</td>
+                <td>
+                    {% if role == 'ADMIN' %}
+                    <button type="submit" class="btn green m-1" id="button">Delete</button>
+                    <button type="submit" class="btn green m-1" id="button">Update</button>
+                    {% else %}
+                    <button type="submit" class="btn green m-1" id="button">Claim</button>
+                    {% endif %}
+                </td>
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+    <div class="flex-center">
+        <p>Tidak ada Voucher.</p>
+    </div>
+{% endif %}

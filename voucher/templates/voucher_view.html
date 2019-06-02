@@ -1,0 +1,74 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col grid">
+            <div class="card">
+                <h1 id="title">Voucher</h1>
+                {% include 'voucher.component.html' %}
+            </div>
+        </div>
+    </div>
+    </div>
+    {% if role == "ADMIN" %}
+        <div id="modal-container" class="modal">
+            <div class="modal-content">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="voucher_id">Id</label>
+                        <input type="text"
+                               class="form-control"
+                               id="voucher_id"
+                               />
+                    </div>
+                    <div class="form-group">
+                        <label for="voucher_nama">Nama Voucher</label>
+                        <input type="text"
+                               class="form-control"
+                               id="voucher_nama"
+                               />
+                    </div>
+                    <div class="form-group">
+                        <label for="voucher_kategori">Kategori</label>
+                        <input type="text"
+                               class="form-control"
+                               id="voucher_kategori"
+                               />
+                    </div>
+                    <div class="form-group">
+                        <label for="voucher_poin">Poin</label>
+                        <input type="number"
+                               class="form-control"
+                               id="voucher_poin"
+                               />
+                    </div>
+                    <div class="form-group">
+                        <label for="voucher_deskripsi">Deskripsi</label>
+                        <input type="text"
+                               class="form-control"
+                               id="voucher_deskripsi"
+                               />
+                    </div>
+                    <div class="form-group">
+                        <label for="voucher_deskripsi">Anggota {{ anggota }}</label>
+                        <input type="text"
+                               class="form-control"
+                               id="voucher_deskripsi"
+                               />
+                    </div>
+                </form>
+                <button id="submit" class="btn green m-1">Add</button>
+            </div>
+
+        </div>
+
+        <div class=" circle ripple modal-btn" data-target="modal-container" data-color="white" id="add-btn">
+            <i id="add" class="material-icons md-light">add</i>
+        </div>
+    {% endif %}
+
+    <script src="{% static 'js/voucher.js' %}"></script>
+
+{% endblock %}

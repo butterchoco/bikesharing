@@ -1,0 +1,39 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col grid">
+            <div class="card">
+                <h1 id="title">Peminjaman</h1>
+                {% include 'peminjaman.component.html' %}
+            </div>
+        </div>
+    </div>
+    </div>
+    {% if role == "ANGGOTA" %}
+        <div id="modal-container" class="modal">
+            <div class="modal-content">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="voucher_id">Id</label>
+                        <select>
+                            {% for data in sepeda %}
+                                <option value={{ data.nomor }} {{ data.merk }} {{ data.id_stasiun }} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </form>
+                <button id="submit" class="btn green m-1">Add</button>
+            </div>
+
+        </div>
+
+        <div class=" circle ripple modal-btn" data-target="modal-container" data-color="white" id="add-btn">
+            <i id="add" class="material-icons md-light">add</i>
+        </div>
+    {% endif %}
+    <script src="{% static 'js/peminjaman.js' %}"></script>
+
+{% endblock %}

@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+
 import dj_database_url
+
 from .utils.decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -53,13 +55,13 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'home',
-    'sepeda',
-    'stasiun',
     'user',
     'transaction',
     'report',
     'acara',
-    'penugasan'
+    'penugasan',
+    'voucher',
+    'peminjaman',
 ]
 
 REST_FRAMEWORK = {
@@ -169,4 +171,3 @@ STATICFILES_DIRS = (
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-INTERNAL_IPS = ('127.0.0.1',)

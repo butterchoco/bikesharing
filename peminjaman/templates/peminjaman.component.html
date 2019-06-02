@@ -1,0 +1,8 @@
+{% if peminjaman|length > 0 %}
+{% for data in peminjaman %}
+{% endfor %}
+{% else %}
+<div class="flex-center">
+  <p>Tidak ada Peminjaman.</p>
+</div>
+{% endif %}
